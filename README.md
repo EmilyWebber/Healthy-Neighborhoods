@@ -7,18 +7,8 @@ Primary Contributors
 - Devin Munger
 - Emily Webber
 
-Goal
-	- Gather, describe, and visualize data on public health in Chicago neighborhoods. Estimate the health of a citizen given an address and key identifiers.
+Project Proposal:
+https://docs.google.com/document/d/1bp4peNHxVyWs_Vg9kCtkTzJGqBRb-ejcQmlKnwEuiv8/edit?usp=sharing
 
-Data Sources
-
-Timeline
-	- Data gathered and cleaned February 2
-	- D3 visualization finished February 16
-	- Website live March 1
-	- Software due March 15
-
-New Technical Skills
-	- web development in Django
-	- D3 visualization
-	- classifier
+Presentation:
+https://docs.google.com/presentation/d/1J2pvvc-qbDQdTnJbEbQt7Xx7Zh1wwgyArGSHP-7P1fw/edit?usp=sharing
