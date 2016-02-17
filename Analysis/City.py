@@ -19,7 +19,7 @@ class City:
     def get_neighborhoods(self, header1, header2):
         '''
         Takes two headers, returns a list of tuples
-        With each neighborhood name and it's measurement
+        With each neighborhood name and its measurement
         '''
         rt = []
         for n in self.city:
@@ -34,7 +34,7 @@ class City:
         '''
         rt = []
         for n in self.city:
-            value = self.city[n].get_measurement(header)
+            value = float(self.city[n].get_measurement(header))
             rt.append(value)
         return rt
 
@@ -43,12 +43,12 @@ class City:
         Return the low, medium, and high thresholds for the neighborhood
         '''
         values = City.get_values(self, header)
-        low = min(values)
-        high = max(values)
-        mean = statistics.mean(values)
-        low_mid = (mean - low)/ 2
-        high_mid = (high - mean) / 2
-        return [(low, low_mid), (low_mid, high_mid), (high_mid, mean)])
+        low = float(min(values))
+        high = float(max(values))
+        mean = float(statistics.mean(values))
+        low_mid = float((mean - low)/ 2)
+        high_mid = float((high - mean) / 2)
+        return [(low, low_mid), (low_mid, high_mid), (high_mid, high)]
 
 
     def __str__(self):
