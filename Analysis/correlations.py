@@ -51,4 +51,4 @@ if __name__ == "__main__":
             print ("Did not enter a valid header")
             sys.exit(0)
 
-    print (go(headers[0], headers[1]))
+    go(headers[0], headers[1])
