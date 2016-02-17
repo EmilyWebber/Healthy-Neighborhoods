@@ -33,8 +33,7 @@ def switch_measurement_for_threshold_assignment(city, neighborhoods, header1, he
 def go(header1, header2):
     c = City(FILE)
     neighborhoods = c.get_neighborhoods(header1, header2)
-    neighborhoods = switch_measurement_for_threshold_assignment(c, neighborhoods, header1, header2)
-    print (neighborhoods)
+    print (switch_measurement_for_threshold_assignment(c, neighborhoods, header1, header2))
 
     
 if __name__ == "__main__":
