@@ -3,19 +3,22 @@ import sys
 from City import City
 import support
 import statistics
+import pandas
+from pandas import DataFrame, Series
+
 
 FILE = 'city_health_stats.csv'
 
-def switch_measurement_for_threshold_assignment(city, neighborhoods, header1, header2):
+def assign_neighborhoods(city, header1, header2):
     '''
-    Walk through a list of tuples (neighborhood, m1, m2) and switch out the measurement 
-    For it's threshold assignment
+    Walk through a list of tuples (neighborhood, m1, m2)
+    And get a color assignment
     '''   
     rt = []
     thresholds1 = city.get_thresholds(header1)
     thresholds2 = city.get_thresholds(header2)
 
-    for n, m1, m2 in neighborhoods:
+    for n, m1, m2 in c.get_neighborhoods(header1, header2):
 
         for idx, (low, high) in enumerate(thresholds1):
             if (m1 >= low) and (m1 <= high):
@@ -30,12 +33,6 @@ def switch_measurement_for_threshold_assignment(city, neighborhoods, header1, he
 
     return rt
 
-def go(header1, header2):
-    c = City(FILE)
-    neighborhoods = c.get_neighborhoods(header1, header2)
-    print (switch_measurement_for_threshold_assignment(c, neighborhoods, header1, header2))
-
-    
 if __name__ == "__main__":
     num_args = len(sys.argv)
 
@@ -43,11 +40,12 @@ if __name__ == "__main__":
         print ("usage: python3 " + sys.argv[0] + " <first header> " + "<second header>")
         sys.exit(0)
     
-    headers = [sys.argv[1], sys.argv[2]]
-    
-    for h in headers:
-        if h not in support.valid_headers:
-            print ("Did not enter a valid header")
-            sys.exit(0)
+    header1 = sys.argv[1]
+    header2 = sys.argv[2]
 
-    go(headers[0], headers[1])
+    if header1 not in support.valid_headers or header2 not in support.valid_headers:
+        print ("Did not enter a valid header")
+        sys.exit(0)
+
+    assign_neighborhoods(City(File), header1, header2)
+
