@@ -7,3 +7,6 @@ class Neighborhood:
             self.dict[h] = float(row[i])
         except:
             self.dict[h] = row[i]
+
+    def get_measurement(self, header):
+        return self.dict[header]
