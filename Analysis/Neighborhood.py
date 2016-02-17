@@ -5,6 +5,7 @@ class Neighborhood:
       for i, h in enumerate(headers):
         try:
             self.dict[h] = float(row[i])
+        # handles the case of missing values, which are very minimal
         except:
             self.dict[h] = row[i]
 
