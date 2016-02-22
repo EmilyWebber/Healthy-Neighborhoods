@@ -3,11 +3,17 @@ import sys
 from City import City
 import support
 import statistics
-import pandas
-from pandas import DataFrame, Series
-
 
 FILE = 'Data/city_health_stats.csv'
+
+
+def go(city, header1, header2):
+
+    
+
+    return
+
+
 
 def assign_neighborhoods(city, header1, header2):
     '''
@@ -33,19 +39,24 @@ def assign_neighborhoods(city, header1, header2):
 
     return rt
 
+
+
+
 if __name__ == "__main__":
-    num_args = len(sys.argv)
 
-    if num_args != 3:
-        print ("usage: python3 " + sys.argv[0] + " <first header> " + "<second header>")
-        sys.exit(0)
+    go(City(File), sys.argv[1], sys.argv[2])
+    # num_args = len(sys.argv)
+
+    # if num_args != 3:
+    #     print ("usage: python3 " + sys.argv[0] + " <first header> " + "<second header>")
+    #     sys.exit(0)
     
-    header1 = sys.argv[1]
-    header2 = sys.argv[2]
+    # header1 = sys.argv[1]
+    # header2 = sys.argv[2]
 
-    if header1 not in support.valid_headers or header2 not in support.valid_headers:
-        print ("Did not enter a valid header")
-        sys.exit(0)
+    # if header1 not in support.valid_headers or header2 not in support.valid_headers:
+    #     print ("Did not enter a valid header")
+    #     sys.exit(0)
 
-    assign_neighborhoods(City(File), header1, header2)
+    # assign_neighborhoods(City(File), header1, header2)
 

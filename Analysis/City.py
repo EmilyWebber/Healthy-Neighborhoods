@@ -22,7 +22,7 @@ class City:
         With each neighborhood name and its measurement
         '''
         rt = []
-        for n in self.city:
+        for n in self.city.keys():
             m = self.city[n].get_measurement(header1)
             o = self.city[n].get_measurement(header2)
             rt.append((n, m, o))
