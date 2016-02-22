@@ -7,7 +7,7 @@ import pandas
 from pandas import DataFrame, Series
 
 
-FILE = 'city_health_stats.csv'
+FILE = 'Data/city_health_stats.csv'
 
 def assign_neighborhoods(city, header1, header2):
     '''
