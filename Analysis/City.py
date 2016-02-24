@@ -2,10 +2,14 @@ import csv
 from Neighborhood import Neighborhood
 import statistics
 
+DEFAULT_KEY = None
+
+
 class City:
 
     def __init__(self, filename):
-        self.city = {}
+        self.neighborhoods = {}
+
         data = []
         with open(filename, 'rU') as f:
             fields = csv.reader(f)
@@ -14,17 +18,38 @@ class City:
         self.headers = data[0]
         for row in data[1:]:
             name = row[1]
-            self.city[name] = Neighborhood(data[0], row)
+            row = City.clean_row(row)
+            self.neighborhoods[name] = Neighborhood(data[0], row)
+
+
+    # this is just a quick fix for now, but it's not a long-term solution
+    # this is changing all the empty cells to zeros
+    def clean_row(row):
+        rt = []
+        for i in row:
+            try:
+                f = float(i)
+                rt.append(i)
+            except:
+                rt.append(0.0)
+        return rt
 
     def get_neighborhoods(self, header1, header2):
         '''
         Takes two headers, returns a list of tuples
         With each neighborhood name and its measurement
+        If the second header is the default, then only grab one measurement instead of two
         '''
         rt = []
-        for n in self.city.keys():
-            m = self.city[n].get_measurement(header1)
-            o = self.city[n].get_measurement(header2)
+        if header2 == DEFAULT_KEY:
+            for n in self.neighborhoods.keys():
+                m = self.neighborhoods[n].get_measurement(header1)
+                rt.append((n, m))
+            return rt
+
+        for n in self.neighborhoods.keys():
+            m = self.neighborhoods[n].get_measurement(header1)
+            o = self.neighborhoods[n].get_measurement(header2)
             rt.append((n, m, o))
         return rt
 
@@ -33,10 +58,16 @@ class City:
         Takes itself and a single header, returns a list of all the neighborhood measurements
         '''
         rt = []
-        for n in self.city:
-            value = float(self.city[n].get_measurement(header))
-            rt.append(value)
+        for n in self.neighborhoods:
+            try:
+                value = self.neighborhoods[n].get_measurement(header)
+                rt.append(float(value))
+            except:
+                pass
         return rt
+
+    def get_headers(self):
+        return self.headers
 
     def get_thresholds(self, header):
         '''
@@ -52,4 +83,4 @@ class City:
 
 
     def __str__(self):
-        return "So far you've got {} neighborhoods".format(len(self.city))
+        return "So far you've got {} neighborhoods".format(len(self.neighborhoods))

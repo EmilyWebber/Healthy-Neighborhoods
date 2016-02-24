@@ -1,30 +1,92 @@
 import csv
 import sys
-from City import City
+import City
 import support
 import statistics
+import csv
 
 FILE = 'Data/city_health_stats.csv'
+DEFAULT_KEY = None
+DEFAULT_VALUE = []
 
 
-def go(city, header1, header2):
-
-    
-
-    return
-
-
-
-def assign_neighborhoods(city, header1, header2):
+def get_headers(filename):
     '''
-    Walk through a list of tuples (neighborhood, m1, m2)
-    And get a color assignment
+    Takes a filename, returns a list of the column headers
+    '''
+    with open(filename, 'rU') as f:
+        fields = csv.reader(f)
+        cols =  next(fields)
+    return cols[2:]
+
+def initialize_city_dict(headers):
+    '''
+    Takes a list of headers, creates an inner dictionary for each variable
+    With every other variable and the default key 
+    '''
+    city = {}
+    for i in headers:
+        other = [x for x in headers if x != i]
+        inner = {DEFAULT_KEY:DEFAULT_VALUE}
+        for each in other:
+            inner[each] = DEFAULT_VALUE
+        city[i] = inner
+    return city
+
+def populate_city(filename):
+    city_class = City.City(filename)
+    headers = city_class.get_headers()
+    city_dict = initialize_city_dict(headers)
+    recurse_through_city(city_dict, city_class, 0)
+    return city_dict
+
+def recurse_through_city(city_dict, city_class, level):
+
+    headers = list(city_dict.keys())
+
+    level += 1
+    
+    if level == 2:
+        return headers
+
+    for i in headers:
+        lower = recurse_through_city(city_dict[i], city_class, level)
+        for each in lower:
+            found = city_dict[i][each]
+            if found == DEFAULT_VALUE:
+                city_dict[i][each] = assign_neighborhoods(city_class, i, each)
+
+    return headers
+
+
+# I'm not happy with this implementation - I don't think it's necessary to compute
+# the thresholds every time we assign neighborhoods.
+# I think it would be better to compute this when initializing the city, drop it off in a dict,
+# And then just reference it here
+
+def assign_neighborhoods(city_class, header1, header2):
+    '''
+    Takes an instance of the class City and two headers,
+    Calls City.get_neighborhoods and walks through the list of return tuples,
+    Checking threshold values and assigning a low, medium, or high tag to the measurement
+    Uses both tags to assign a color
+    Returns a list of tuples of neighborhoods and their color assignment
     '''   
     rt = []
-    thresholds1 = city.get_thresholds(header1)
-    thresholds2 = city.get_thresholds(header2)
+    thresholds1 = city_class.get_thresholds(header1)
 
-    for n, m1, m2 in c.get_neighborhoods(header1, header2):
+    if header2 == DEFAULT_KEY:
+        for n, m in city_class.get_neighborhoods(header1, header2):
+            for idx, (low, high) in enumerate(thresholds1):
+                if (m >= low) and (m <= high):
+                    m_idx = support.index_matrix[idx]
+            color = support.color_matrix[(m_idx, DEFAULT_KEY)]
+            rt.append((n, color))
+        return rt
+
+
+    thresholds2 = city_class.get_thresholds(header2)
+    for n, m1, m2 in city_class.get_neighborhoods(header1, header2):
 
         for idx, (low, high) in enumerate(thresholds1):
             if (m1 >= low) and (m1 <= high):
@@ -39,24 +101,6 @@ def assign_neighborhoods(city, header1, header2):
 
     return rt
 
-
-
-
 if __name__ == "__main__":
 
-    go(City(File), sys.argv[1], sys.argv[2])
-    # num_args = len(sys.argv)
-
-    # if num_args != 3:
-    #     print ("usage: python3 " + sys.argv[0] + " <first header> " + "<second header>")
-    #     sys.exit(0)
-    
-    # header1 = sys.argv[1]
-    # header2 = sys.argv[2]
-
-    # if header1 not in support.valid_headers or header2 not in support.valid_headers:
-    #     print ("Did not enter a valid header")
-    #     sys.exit(0)
-
-    # assign_neighborhoods(City(File), header1, header2)
-
+    rt = populate_city(FILE)

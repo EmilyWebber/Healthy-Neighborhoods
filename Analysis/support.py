@@ -1,6 +1,9 @@
-valid_headers = ['Community Area','Community Area Name','Birth Rate','General Fertility Rate','Low Birth Weight','Prenatal Care Beginning in First Trimester','Preterm Births','Teen Birth Rate','Assault (Homicide)','Breast cancer in females','Cancer (All Sites)','Colorectal Cancer','Diabetes-related','Firearm-related','Infant Mortality Rate','Lung Cancer','Prostate Cancer in Males','Stroke (Cerebrovascular Disease)','Childhood Blood Lead Level Screening','Childhood Lead Poisoning','Gonorrhea in Females','Gonorrhea in Males','Tuberculosis','Below Poverty Level','Crowded Housing','Dependency','No High School Diploma', 'Per Capita Income', 'Unemployment']
+DEFAULT_KEY = None
 
 color_matrix = {
+    ("low", DEFAULT_KEY): 1,
+    ("med", DEFAULT_KEY): 2,
+    ("high", DEFAULT_KEY): 3,
     ("low", "low") : 1,
     ("med", "low") : 2,
     ("high", "low") : 3,
