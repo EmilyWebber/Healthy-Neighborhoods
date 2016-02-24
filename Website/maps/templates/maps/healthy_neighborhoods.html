@@ -1,0 +1,38 @@
+{% extends 'maps/base.html' %}
+
+{% block body %}
+
+
+	<p>Select your regressors: </p>
+
+
+<!--
+<form class ="drop_down_menu">
+	<select name="x">
+		<option>A</option>
+		<option>B</option>
+		<option>C</option>
+	</select>
+</form>
+
+<form class ="drop_down_menu">
+	<select name="y">
+		<option>A</option>
+		<option>B</option>
+		<option>C</option>
+	</select>
+</form>
+nstall Bootstrap -->
+
+
+ <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Bar
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li>A</li>
+    <li>B</li>
+    <li>C</li>
+  </ul>
+</div>
+
+{% endblock %}
