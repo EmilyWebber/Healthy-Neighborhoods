@@ -9,10 +9,10 @@ VARIABLES = (("CHO", "childhood obesity"), ("DBS", "diabetes"), ("HPT", "hyperte
 
 class Variable(models.Model):
 	#value = models.FloatField()
-	name = models.CharField(max_length = 50, choices = VARIABLES)
+	name = VARIABLES ##models.CharField(max_length = 50, choices = VARIABLES)
 
 class Neighborhood(models.Model):
 	name = models.CharField(max_length = 200)
 
-	def __str__(self):
-		return name
+def __str__(self):
+	return name

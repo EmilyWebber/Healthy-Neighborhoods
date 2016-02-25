@@ -2,13 +2,19 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import datetime ##for testing
 
+from . import models
 
 def blank(request):
 	return render(request, "maps/default.html")
 	##HttpResponse("Nothing here.")
 
 def healthy_neighborhoods(request):
-	return render(request, "maps/healthy_neighborhoods.html")
+
+	variables = models.Variable.name
+
+	c = {"variables": variables,}
+
+	return render(request, "maps/healthy_neighborhoods.html", c)
 	##return HttpResponse("Healthy Neighborhoods")
 
 ##for testing

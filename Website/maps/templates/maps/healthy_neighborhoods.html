@@ -2,7 +2,6 @@
 
 {% block body %}
 
-
 	<p>Select your regressors: </p>
 
 
@@ -22,17 +21,51 @@
 		<option>C</option>
 	</select>
 </form>
-nstall Bootstrap -->
+ -->
+
+ <!-- Map -->
+    <style>
+      #map {
+        width: 500px;
+        height: 400px;
+        left: 30px;
+      }
+    </style>
+
+  <body>
+    <div id = "map"></div>
+    <script>
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+          center: {lat: 41.847, lng: -87.642},
+          zoom: 10
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+  </body>
+
+<!-- Dropdown bar -->
+
+	<div class = "dropdown">
+		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown">Dropdown Bar
+		<span class ="caret"></span></button>
+		<ul class="dropdown-menu">
+			{% for variable in variables %}
+				<li>{{variable}}</li>
+			{% endfor %}
+			<li class="divider"></li>
+			<li>None</li>
+		</ul>
+	</div>
 
 
- <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Bar
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li>A</li>
-    <li>B</li>
-    <li>C</li>
-  </ul>
-</div>
+
+
+
+
+
 
 {% endblock %}
