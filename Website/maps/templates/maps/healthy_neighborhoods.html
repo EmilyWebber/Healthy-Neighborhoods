@@ -41,14 +41,16 @@
         var map = new google.maps.Map(mapDiv, {
           center: {lat: 41.847, lng: -87.642},
           //center: new google.maps.LatLng(-19.2577, 146.8236),
-          zoom: 12
+          zoom: 11
         });
 
         // KML map layer
-        var kmlLayer = new google.maps.KmlLayer("https://data.cityofchicago.org/d/buma-fjbv?category=Facilities-Geographic-Boundaries&view_name=Boundaries-Neighborhoods-KML", {
+        var kmlLayer = new google.maps.KmlLayer("http://sites.google.com/site/healthyneighborhoodschicago/chicago_overlay.kml", {
+        //var kmlLayer = new google.maps.KmlLayer("https://www.dropbox.com/s/gwc3aj01jvr9j2m/test_doc.kml?dl=0", {
+        //var kmlLayer = new google.maps.KmlLayer("http://chicagomap.zolk.com/sources/neighborhoods/source.kml", {
         //var kmlLayer = new google.maps.KmlLayer("https://developers.google.com/maps/tutorials/kml/westcampus.kml", {
         	supressInfoWindows: true,
-        	preserveViewport: false,
+        	preserveViewport: true,
         	map: map
         });
 
