@@ -28,8 +28,9 @@
     <style>
       #map {
         width: 100%;
-        height: 75%;
-        left: 10px;
+        height: 70%;
+        position: absolute;
+        left: 200px;
       }
     </style>
 
@@ -66,8 +67,9 @@
 <!-- Dropdown bar -->
 
 	<div class = "dropdown">
-		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown">Variable 1
+		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown" >Variable 1
 		<span class ="caret"></span></button>
+		</button>
 		<ul class="dropdown-menu">
 			{% for variable in variables %}
 				<li>{{variable}}</li>
@@ -78,6 +80,7 @@
 	<div class = "dropdown">
 		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown">Variable 2
 		<span class ="caret"></span></button>
+		</button>
 		<ul class="dropdown-menu">
 			{% for variable in variables %}
 				<li>{{variable}}</li>

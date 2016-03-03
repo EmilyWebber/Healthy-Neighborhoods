@@ -1,15 +1,14 @@
 from __future__ import unicode_literals
-
 from django.db import models
-
-# Create your models here.
-
-VARIABLES = (("CHO", "childhood obesity"), ("DBS", "diabetes"), ("HPT", "hypertension"), ("GRS", "grocery stores"),)
-
+import os
 
 class Variable(models.Model):
-	#value = models.FloatField()
-	name = VARIABLES ##models.CharField(max_length = 50, choices = VARIABLES)
+	base_path = os.path.dirname(__file__)
+	file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/Data/city_health_stats.csv" ))
+
+	with open(file_path) as f:
+		variables = f.readline().strip().split(",")[2:]
+
 
 class Neighborhood(models.Model):
 	name = models.CharField(max_length = 200)

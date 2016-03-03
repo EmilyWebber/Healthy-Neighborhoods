@@ -10,15 +10,11 @@ def blank(request):
 
 def healthy_neighborhoods(request):
 
-	variables = models.Variable.name
-
-	c = {"variables": variables,}
+	c = {"variables": models.Variable.variables,}
 
 	return render(request, "maps/healthy_neighborhoods.html", c)
 	##return HttpResponse("Healthy Neighborhoods")
 
-##for testing
-def home_page(request):
-	now = datetime.datetime.now()
-	html = "<html><h1>Home page</h1><p>It is now {}.</p></html>".format(now)
-	return HttpResponse(html)
+class VariableSelectionForm(forms.ModelForm):
+	class Meta:
+		model = models.Variable
