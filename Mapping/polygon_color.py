@@ -1,6 +1,5 @@
 # function to turn Community CSV into a dictionary
 
-#header = ['the_geom', 'AREA', 'PERIMETER', 'COMAREA_', 'COMAREA_ID', 'AREA_NUMBE', 'COMMUNITY', 'AREA_NUM_1', 'SHAPE_AREA', 'SHAPE_LEN']
 
 import csv
 import re
@@ -16,12 +15,17 @@ def community_dict (filename):
     {'DOUGLAS': [{'lat': '-87.60914087617012', 'long': '41.8446925034611'},
     {'lat': '-87.60914874756925', 'long': '41.84466159923116'},...]
 
-    '''
+    #header = ['the_geom', 'AREA', 'PERIMETER', 'COMAREA_', 'COMAREA_ID', 'AREA_NUMBE', 'COMMUNITY', 'AREA_NUM_1', 'SHAPE_AREA', 'SHAPE_LEN']
 
+
+    '''
     comm_dict =  {}
     with open(filename, 'rt') as f:
-        reader = csv.reader(f)
-        for row in islice(reader,1,2):
+        fields = csv.reader(f)
+        header = next(fields)
+        for row in fields:
+        # for row in islice(fields, 0, 2):    
+            #Use the above if you are just testing with a few rows
             community = row[COMM]
             comm_dict[community] = []
             geo = row[COORD]
@@ -37,8 +41,9 @@ def community_dict (filename):
                 point["lat"] = lat1
                 point["long"] = lon2
                 comm_dict[community].append(point)
-        return comm_dict
-                
+        return comm_dict 
+
+
 if __name__=="__main__":
 
     filename = "CommAreas.csv"
