@@ -17,8 +17,9 @@ def healthy_neighborhoods(request):
 	if request.method == "POST":
 		form = models.Variable(request.POST)
 		if form.is_valid():
-			print(form.cleaned_data["variable_1"])
-			print(form.cleaned_data["variable_2"])
+			v1 = form.cleaned_data["variable_1"]
+			v2 = form.cleaned_data["variable_2"]
+			print(models.get_result_list(v1, v2))
 
 	return render(request, "maps/healthy_neighborhoods.html", {"form": form,})
 	##return HttpResponse("Healthy Neighborhoods")
