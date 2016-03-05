@@ -8,6 +8,7 @@ import csv
 FILE = 'Data/city_health_stats.csv'
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
+SIX = False
 
 
 def get_headers(filename):
@@ -33,6 +34,7 @@ def initialize_city_dict(headers):
         city[i] = inner
     return city
 
+
 def populate_city(filename):
     city_class = City.City(filename)
     headers = city_class.get_headers()
@@ -41,7 +43,12 @@ def populate_city(filename):
     return city_dict
 
 def recurse_through_city(city_dict, city_class, level):
-
+    '''
+    Takes an instance of the class city and an initialized dictionary
+    Recurses through initialized dictionary
+    Adding correctly assigned neighborhoods based on correlation
+    Between two variables
+    '''
     headers = list(city_dict.keys())
 
     level += 1
@@ -84,7 +91,6 @@ def assign_neighborhoods(city_class, header1, header2):
             rt.append((n, color))
         return rt
 
-
     thresholds2 = city_class.get_thresholds(header2)
     for n, m1, m2 in city_class.get_neighborhoods(header1, header2):
 
@@ -97,6 +103,8 @@ def assign_neighborhoods(city_class, header1, header2):
                 m2_idx = support.index_matrix[idx]
 
         color = support.color_matrix[(m1_idx, m2_idx)]
+        if SIX:
+            color = support.convert[color]
         rt.append((n, color))
 
     return rt
@@ -105,5 +113,9 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.exit(1)
     variable_dict = populate_city(FILE)
+
+    # if you want the neighborhood assigned integers from 1-9, 
+    # change global boolean "SIX" back to False
+
     print(variable_dict[sys.argv[1]][sys.argv[2]])
     ## Prints list of tuples ("neighborhood name", color value)
