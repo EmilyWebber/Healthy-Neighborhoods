@@ -3,12 +3,12 @@ from Neighborhood import Neighborhood
 import statistics
 
 DEFAULT_KEY = None
+DISTRIBUTE = False
 
 class City:
 
     def __init__(self, filename):
         self.neighborhoods = {}
-
         data = []
         with open(filename, 'rU') as f:
             fields = csv.reader(f)
@@ -26,7 +26,7 @@ class City:
             #     name = row[1]
             #     self.neighborhoods[name] = Neighborhood(self.headers, row)
 
-    # this is just a quick fix for now, but it's not a long-term solution
+    # this is just a quick fix for now, not a long-term solution
     # this is changing all the empty cells to zeros
     def clean_row(row):
         '''
@@ -67,11 +67,8 @@ class City:
         '''
         rt = []
         for n in self.neighborhoods:
-            try:
-                value = self.neighborhoods[n].get_measurement(header)
-                rt.append(float(value))
-            except:
-                pass
+            value = self.neighborhoods[n].get_measurement(header)
+            rt.append(value)
         return rt
 
     def get_headers(self):

@@ -10,7 +10,6 @@ DEFAULT_KEY = None
 DEFAULT_VALUE = []
 SIX = True
 
-
 def get_headers(filename):
     '''
     Takes a filename, returns a list of the column headers
