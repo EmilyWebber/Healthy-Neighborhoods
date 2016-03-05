@@ -10,15 +10,26 @@ def blank(request):
 
 def healthy_neighborhoods(request):
 
-	variables = models.Variable.name
+	##c = {"variables": models.Variable.variables,}
+	##c = {"form": form,}
 
-	c = {"variables": variables,}
+	form = models.Variable()
+	if request.method == "POST":
+		form = models.Variable(request.POST)
+		if form.is_valid():
+			print(form.cleaned_data["variable_1"])
+			print(form.cleaned_data["variable_2"])
 
-	return render(request, "maps/healthy_neighborhoods.html", c)
+	return render(request, "maps/healthy_neighborhoods.html", {"form": form,})
 	##return HttpResponse("Healthy Neighborhoods")
 
-##for testing
-def home_page(request):
-	now = datetime.datetime.now()
-	html = "<html><h1>Home page</h1><p>It is now {}.</p></html>".format(now)
-	return HttpResponse(html)
+
+
+def map(request):
+	return render(request, "maps/map")
+'''
+class VariableSelectionForm(forms.ModelForm):
+	class Meta:
+		model = models.Variable
+		fields = ["variable"]
+'''

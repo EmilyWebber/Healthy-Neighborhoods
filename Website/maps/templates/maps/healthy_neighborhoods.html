@@ -1,8 +1,9 @@
 {% extends 'maps/base.html' %}
+{% load staticfiles %}
 
 {% block body %}
 
-	<p>Select your regressors: </p>
+	<p>Select your variable: </p>
 
 
 <!--
@@ -26,9 +27,12 @@
  <!-- Map -->
     <style>
       #map {
-        width: 500px;
-        height: 400px;
-        left: 30px;
+        width: 100%;
+        height: 80%;
+        position: absolute;
+        left: 200px;
+        top: 300px;
+
       }
     </style>
 
@@ -39,33 +43,58 @@
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
           center: {lat: 41.847, lng: -87.642},
-          zoom: 10
+          //center: new google.maps.LatLng(-19.2577, 146.8236),
+          zoom: 11
         });
+
+        // KML map layer
+        var kmlLayer = new google.maps.KmlLayer("https://sites.google.com/site/chihealthyneighborhoods/kml-links/Boundaries%20-%20Community%20Areas%20%28current%29.kml", {
+        //var kmlLayer = new google.maps.KmlLayer("https://www.dropbox.com/s/gwc3aj01jvr9j2m/test_doc.kml?dl=0", {
+        //var kmlLayer = new google.maps.KmlLayer("http://chicagomap.zolk.com/sources/neighborhoods/source.kml", {
+        //var kmlLayer = new google.maps.KmlLayer("https://developers.google.com/maps/tutorials/kml/westcampus.kml", {
+        	supressInfoWindows: true,
+        	preserveViewport: true,
+        	map: map
+        });
+
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
         async defer></script>
   </body>
 
+
+
+
 <!-- Dropdown bar -->
 
+<!--
 	<div class = "dropdown">
-		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown">Dropdown Bar
+		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown" >Variable 1
 		<span class ="caret"></span></button>
+		</button>
 		<ul class="dropdown-menu">
-			{% for variable in variables %}
+			{% for variable in form %}
 				<li>{{variable}}</li>
 			{% endfor %}
-			<li class="divider"></li>
-			<li>None</li>
 		</ul>
 	</div>
-
-
-
-
-
-
-
-
+-->
+<!--
+<div class="btn-group">
+         <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+           <span data-bind="label">Select One</span>
+         </button>
+         <ul class="dropdown" role="menu">
+             {% for variable in form %}
+                 <li>{{ variable }}</li>
+             {% endfor %}
+         </ul>
+      </div>
+-->
+<form method ="post">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" value="Submit"/>
+</form>
 {% endblock %}
