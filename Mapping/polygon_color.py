@@ -41,7 +41,7 @@ def community_dict (filename):
                 point["lat"] = lat1
                 point["long"] = lon2
                 comm_dict[community].append(point)
-        print (len(comm_dict))
+        # print (len(comm_dict))
         return comm_dict 
 
 
