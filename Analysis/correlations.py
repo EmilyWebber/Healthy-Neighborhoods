@@ -104,7 +104,6 @@ def assign_neighborhoods(city_class, header1, header2):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.exit(1)
-    else:
-        variable_dict = populate_city(FILE)
-        print(variable_dict[sys.argv[1]][sys.argv[2]])
-        ## Prints list of tuples ("neighborhood name", color value)
+    variable_dict = populate_city(FILE)
+    print(variable_dict[sys.argv[1]][sys.argv[2]])
+    ## Prints list of tuples ("neighborhood name", color value)

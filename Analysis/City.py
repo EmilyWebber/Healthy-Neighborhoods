@@ -4,7 +4,6 @@ import statistics
 
 DEFAULT_KEY = None
 
-
 class City:
 
     def __init__(self, filename):
@@ -21,10 +20,19 @@ class City:
             row = City.clean_row(row)
             self.neighborhoods[name] = Neighborhood(data[0], row)
 
+            # self.headers = next(fields)
+            # for row in fields:
+            #     row = City.clean_row(row)
+            #     name = row[1]
+            #     self.neighborhoods[name] = Neighborhood(self.headers, row)
 
     # this is just a quick fix for now, but it's not a long-term solution
     # this is changing all the empty cells to zeros
     def clean_row(row):
+        '''
+        Takes a list of measurements, trys to convert each value to a float.
+        If not, add a 0.0.
+        '''
         rt = []
         for i in row:
             try:
@@ -80,7 +88,6 @@ class City:
         low_mid = float((mean - low)/ 2)
         high_mid = float((high - mean) / 2)
         return [(low, low_mid), (low_mid, high_mid), (high_mid, high)]
-
 
     def __str__(self):
         return "So far you've got {} neighborhoods".format(len(self.neighborhoods))

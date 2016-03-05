@@ -1,4 +1,4 @@
-City.py - A class that takes a csv file, generates neighborhoods, and creates city-wide statistics.
+City.py - A class that takes a csv file and generates neighborhoods
 
 Neighborhood.py - A class that takes a row in the csv and turns it into a dictionary where the keys are headers and the values are the measurements
 
