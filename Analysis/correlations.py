@@ -8,7 +8,7 @@ import csv
 FILE = 'Data/city_health_stats.csv'
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
-SIX = False
+SIX = True
 
 
 def get_headers(filename):
