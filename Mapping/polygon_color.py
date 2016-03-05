@@ -36,12 +36,12 @@ def community_dict (filename):
             for each in l:
                 point = {}
                 a = each.split()
-                lat1 = a[0]
-                lon2 = a[1]
+                lat1 = float(a[0])
+                lon2 = float(a[1])
                 point["lat"] = lat1
-                point["long"] = lon2
+                point["lng"] = lon2
                 comm_dict[community].append(point)
-        # print (len(comm_dict))
+        print (comm_dict["HYDE PARK"])
         return comm_dict 
 
 
