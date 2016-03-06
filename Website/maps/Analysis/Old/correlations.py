@@ -61,7 +61,6 @@ def recurse_through_city(city_dict, city_class, level):
 
     return headers
 
-
 # I'm not happy with this implementation - I don't think it's necessary to compute
 # the thresholds every time we assign neighborhoods.
 # I think it would be better to compute this when initializing the city, drop it off in a dict,

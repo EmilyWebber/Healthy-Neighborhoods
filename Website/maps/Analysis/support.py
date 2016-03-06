@@ -1,9 +1,9 @@
 DEFAULT_KEY = None
 
 color_matrix = {
-    ("low", DEFAULT_KEY): 1,
-    ("med", DEFAULT_KEY): 2,
-    ("high", DEFAULT_KEY): 3,
+    ("low", DEFAULT_KEY): "#BCC6CC",
+    ("med", DEFAULT_KEY): "#98AFC7",
+    ("high", DEFAULT_KEY): "#6D7B8D",
     ("low", "low") : "#BCC6CC",
     ("med", "low") : "#98AFC7",
     ("high", "low") : "#6D7B8D",
