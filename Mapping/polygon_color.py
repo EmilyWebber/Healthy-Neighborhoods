@@ -27,7 +27,7 @@ def community_dict (filename):
         for row in fields:
         # for row in islice(fields, 0, 2):    
             #Use the above if you are just testing with a few rows
-            community = row[COMM].title()
+            community = row[COMM].strip()title()
             comm_dict[community] = []
             geo = row[COORD]
             bad_char = "MULTIPOLYGON"

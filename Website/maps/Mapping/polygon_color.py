@@ -45,17 +45,18 @@ def community_dict (filename):
                 a = each.split()
                 lat1 = float(a[1])
                 lon2 = float(a[0])
-                point['lat'] = lat1
-                point['lng'] = lon2
+                point["lat"] = lat1
+                point["lng"] = lon2
                 location_json = json.dumps({"lat": lat1, "lng": lon2})
-                comm_dict[community].append(lat1, lon2)
+                comm_dict[community].append(location_json)
         # print (len(comm_dict))
         return comm_dict 
 
 def main():
     comm_dict = community_dict(FILE)
     ##print(["{}: {}".format(x, len(comm_dict[x])) for x in list(comm_dict.keys())])    
-    return comm_dict
+    ##return json.dumps(comm_dict)
+    return json.dumps(comm_dict)
 '''
 if __name__=="__main__":
     main()
