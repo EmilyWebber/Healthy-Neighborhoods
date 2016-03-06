@@ -2,7 +2,7 @@ import csv
 import sys
 import City
 import support
-import csv
+import numpy as np
 
 FILE = 'Data/city_health_stats.csv'
 DEFAULT_KEY = None
@@ -15,7 +15,16 @@ def go(var1, var2, rt, xs, ys, headers):
 			headers[e] = i
 		for row in fields:
 			add_to_lists(row, xs, ys, rt, headers, var1, var2)
+
 	return assign_colors(xs, ys, rt, [])
+
+
+def get_correlation_coefficient(xs, ys, final):
+	'''
+	Takes both xs and ys, finds the correlation coefficient and adds to final list
+	'''
+	return [("coefficient", np.corrcoef(xs, ys)[1,0])]
+
 
 def assign_colors(xs, ys, rt, final):
 	'''
@@ -29,6 +38,8 @@ def assign_colors(xs, ys, rt, final):
 					x_id = support.index_matrix[idx]
 			rt.append((name, support.color_matrix[(m_idx, DEFAULT_KEY)]))
 		return rt
+
+	final = get_correlation_coefficient(xs, ys, final)
 
 	for (name, x, y) in rt:
 		for idx, (low, high) in enumerate(get_thresholds(xs)):
@@ -66,6 +77,8 @@ def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 		rt.append((name, x, y))
 		if y != None:
 			ys.append(y)
+		if x != None:
+			xs.append(x)
 	else:
 		rt.append((name, x))
 		if x != None:
