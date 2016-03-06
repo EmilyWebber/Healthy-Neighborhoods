@@ -3,6 +3,7 @@
 
 import csv
 import re
+import json
 from itertools import islice
 COORD = 0
 COMM = 6
@@ -36,13 +37,14 @@ def community_dict (filename):
             for each in l:
                 point = {}
                 a = each.split()
-                lat1 = a[0]
-                lon2 = a[1]
+                lat1 = float(a[0])
+                lon2 = float(a[1])
                 point["lat"] = lat1
-                point["long"] = lon2
+                point["lng"] = lon2
                 comm_dict[community].append(point)
-        # print (len(comm_dict))
-        return comm_dict 
+
+    with open('comm_dict.json', 'w') as fp:
+        json.dump(comm_dict, fp)  
 
 
 if __name__=="__main__":
