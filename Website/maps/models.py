@@ -5,17 +5,24 @@ import os
 import csv
 
 import sys
+
+from django.core.management import call_command
+
+from Analysis import correlations
+from Mapping import polygon_color
+
 ##sys.path.insert(0, "/Healthy-Neighborhoods/Analysis/")
 ##print(sys.path)
 ##from Analysis import correlations
 
 
 base_path = os.path.dirname(__file__)
+#file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/")))
 
 
 def get_variables_choices():
-	file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/Data/city_health_stats.csv" ))
-	
+	file_path = str(os.path.abspath(os.path.join(base_path, "Analysis/Data/city_health_stats.csv" )))
+
 	with open(file_path, "rU") as f:
 		reader = csv.reader(f)
 		variables = f.next().strip().split(",")[2:]
@@ -29,7 +36,7 @@ def get_variables_choices():
 	print(cols)
 	return cols[2:]
 	'''
-
+	
 class Variable(forms.Form):
 	variable_choices = get_variables_choices()
 	variable_1 = forms.ChoiceField(label = "Variable 1", choices = variable_choices)
@@ -45,13 +52,24 @@ def get_result_list(variable_1, variable_2):
 	##print(file_path)
 	##from file_path import correlations
 
-	os.chdir(os.path.abspath(os.path.join(base_path, "..", "..", "Analysis" )))
+	##os.chdir(os.path.abspath(os.path.join(base_path, "..", "..", "Analysis" )))
 
-	from . import correlations
+	##import correlations
 
 	variable_2 = None if variable_1 == variable_2 else variable_2
 	variable_2 = None if variable_2 == "None" else variable_2
-	print(correlations.main(variable_1, variable_2))
+	##print(correlations.main(variable_1, variable_2))
+
+	print(variable_1)
+	print(variable_2)
+	neighborhood_list = correlations.main(variable_1, variable_2)
+	return neighborhood_list
+	##file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/correlations.py" ))
+	##os.system(file_path)
+
+def get_neighborhood_dict():
+	neighborhood_dict = polygon_color.main()
+	return neighborhood_dict
 
 '''
 class Neighborhood(models.Model):

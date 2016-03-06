@@ -2,15 +2,18 @@ import csv
 import sys
 import City
 import support
-import statistics
+##import statistics
 import csv
+import os
 
-FILE = 'Data/city_health_stats.csv'
+base_path = os.path.dirname(__file__)
+FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
+##FILE = 'Data/city_health_stats.csv'
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
 
-def get_headers(filename):
+def get_headers(filename = FILE):
     '''
     Takes a filename, returns a list of the column headers
     '''
