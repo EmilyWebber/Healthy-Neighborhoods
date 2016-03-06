@@ -125,14 +125,19 @@
 
           
           {% for neighborhood, coordinates in neighborhoods.items %}
-            var name = {{neighborhood|safe}}
+            //var name = {{neighborhood|safe}};
+
             var arr = [];
             
-            var coordinate_list = {{coordinates|safe}}
-            {% for coordinate in coordinate_list}
+            var coordinate_list = {{coordinates.cords|safe}};
             
-              arr.push({lat: {{coordinate.lat|safe}}, lng: {{coordinate.lat|safe}}});
+            for (var i = 0; i < coordinate_list.length; i++) {
+              arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
+            }
 
+
+
+    
             // Looped polygon.
             var neighborhoodPolygon = new google.maps.Polygon({
               paths: arr,

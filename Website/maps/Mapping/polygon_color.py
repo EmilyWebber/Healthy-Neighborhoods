@@ -34,21 +34,27 @@ def community_dict (filename):
         # for row in islice(fields, 0, 2):    
             #Use the above if you are just testing with a few rows
             community = row[COMM].title()
-            comm_dict[community] = []
+            cords = []
+
             geo = row[COORD]
             bad_char = "MULTIPOLYGON"
             lsd = geo.replace("(", "").replace(")", "")
             cleaned = re.sub(bad_char, '', lsd)
             l = cleaned.split(",")
+            if community == "Norwood Park":
+                l = l [:1328]
+                ##(correction for empty space in polygon AKA annexation of norridge
+            if community == "Ohare":
+                l = l[:-197]
+                ## correction for empty space in polygon AKA RIP Groot industries
             for each in l:
-                point = {}
+
                 a = each.split()
-                lat1 = float(a[1])
-                lon2 = float(a[0])
-                point["lat"] = lat1
-                point["lng"] = lon2
-                location_json = json.dumps({"lat": lat1, "lng": lon2})
-                comm_dict[community].append(location_json)
+                lat = float(a[1])
+                lon = float(a[0])
+
+                cords.append([lat, lon])
+            comm_dict[community] = {"cords": cords}
         # print (len(comm_dict))
         return comm_dict 
 
@@ -56,7 +62,7 @@ def main():
     comm_dict = community_dict(FILE)
     ##print(["{}: {}".format(x, len(comm_dict[x])) for x in list(comm_dict.keys())])    
     ##return json.dumps(comm_dict)
-    return json.dumps(comm_dict)
+    return comm_dict
 '''
 if __name__=="__main__":
     main()
@@ -64,5 +70,13 @@ if __name__=="__main__":
 
     comm_dict = community_dict(filename)
 '''
+    ##print([len(comm_dict[x]) for x in list(comm_dict.keys())])   
 
-    ##print([len(comm_dict[x]) for x in list(comm_dict.keys())])    
+def get_len(comm_dict):
+    community = "Norwood Park"
+    coord_list = comm_dict[community]["cords"]
+    for i, x in enumerate(coord_list):
+        if (41.97 < x[0] < 42):
+            print("[{}]: {}  --  {}  --  {}".format(i, coord_list[i - 1], coord_list[i], coord_list[i+1]))
+
+ 
