@@ -27,9 +27,13 @@ def healthy_neighborhoods(request):
 			neighborhood_coord_dict = models.get_neighborhood_dict()
 
 			print(neighborhood_coord_dict.keys())
+			print(len(neighborhood_coord_dict.keys()))
 
 
 			models.get_combo_dict(neighborhood_list, neighborhood_coord_dict)
+
+			print(neighborhood_list)
+			print(len(neighborhood_list))
 			'''
 			for neighborhood in neighborhood_coord_dict:
 				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps('#C8011E')

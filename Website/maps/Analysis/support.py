@@ -15,7 +15,8 @@ color_matrix = {
     ("high", "med") : "#AB0235", 
     ("low", "high") : "#0008BF",   
     ("med", "high") : "#1C07A8", 
-    ("high", "high") : "#720463", 
+    ("high", "high") : "#720463",
+    None:  "#B5B5B5"
 }
 
 index_matrix = {

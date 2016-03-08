@@ -2,17 +2,11 @@ import csv
 import sys
 import support
 import numpy as np
-
-FILE = 'Data/city_health_stats.csv'
-
-import support
-import numpy as np
 import os
 
 base_path = os.path.dirname(__file__)
 FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 ##FILE = 'Data/city_health_stats.csv'
-
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
@@ -25,6 +19,7 @@ def go(var1, var2, rt, xs, ys, headers):
 			add_to_lists(row, xs, ys, rt, headers, var1, var2)
 
 	return assign_colors(xs, ys, rt, [])
+
 
 def get_correlation_coefficient(xs, ys):
 	'''
@@ -46,7 +41,6 @@ def assign_colors(xs, ys, rt, final):
 			rt.append((name, support.color_matrix[(m_idx, DEFAULT_KEY)]))
 		return rt
 
-
 	for (name, x, y) in rt:
 		for idx, (low, high) in enumerate(get_thresholds(xs)):
 		 	if (x >= low) and (x <= high):
@@ -56,9 +50,7 @@ def assign_colors(xs, ys, rt, final):
 		 		y_id = support.index_matrix[idx]
 		final.append((name, support.color_matrix[(x_id, y_id)]))
 
-
 	return (get_correlation_coefficient(xs, ys), final)
-
 
 def get_thresholds(xs):
 	'''
@@ -114,3 +106,4 @@ if __name__ == "__main__":
 
 	print(go(sys.argv[1],sys.argv[2], [], [], [], {}))
 
+	##modification .. . .

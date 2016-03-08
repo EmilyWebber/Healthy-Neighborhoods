@@ -41,10 +41,14 @@ def community_dict (filename):
             lsd = geo.replace("(", "").replace(")", "")
             cleaned = re.sub(bad_char, '', lsd)
             l = cleaned.split(",")
+            if community == "Mckinley Park":
+                community = "McKinley Park"
+
             if community == "Norwood Park":
                 l = l [:1328]
                 ##(correction for empty space in polygon AKA annexation of norridge
             if community == "Ohare":
+                community = "O'Hare"
                 l = l[:-197]
                 ## correction for empty space in polygon AKA RIP Groot industries
             for each in l:
