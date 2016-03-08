@@ -13,10 +13,6 @@ from django.core.management import call_command
 from Analysis import correlations
 from Mapping import polygon_color
 
-##sys.path.insert(0, "/Healthy-Neighborhoods/Analysis/")
-##print(sys.path)
-##from Analysis import correlations
-
 
 base_path = os.path.dirname(__file__)
 #file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/")))

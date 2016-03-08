@@ -1,0 +1,21 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+<html>
+<body>
+  <h3>Select your variable: </h3>
+
+</body>
+
+
+<form method ="post">
+	{% csrf_token %}
+	{{form}}
+	<input type="submit" value="Submit"/>
+</form>
+
+
+</html>
+
+{% endblock %}
