@@ -2,8 +2,8 @@ import csv
 import sys
 import City
 import support
-import statistics
-import csv
+# import statistics
+
 
 FILE = 'Data/city_health_stats.csv'
 DEFAULT_KEY = None
@@ -108,25 +108,16 @@ def assign_neighborhoods(city_class, header1, header2):
 
     return rt
 
-'''
+
+    def main(variable_1, variable_2 = None):
+        variable_dict = populate_city(FILE)
+        return variable_dict[variable_1][variable_2]
+
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.exit(1)
-<<<<<<< HEAD
-    else:
-        variable_dict = populate_city(FILE)
-        print(variable_dict[sys.argv[1]][sys.argv[2]])
-        ## Prints list of tuples ("neighborhood name", color value)
-'''
-def main(variable_1, variable_2 = None):
-    variable_dict = populate_city(FILE)
-    return variable_dict[variable_1][variable_2]
-=======
-    variable_dict = populate_city(FILE)
 
-    # if you want the neighborhood assigned integers from 1-9, 
-    # change global boolean "SIX" back to False
-
+    variable_dict = populate_city(FILE)
     print(variable_dict[sys.argv[1]][sys.argv[2]])
-    ## Prints list of tuples ("neighborhood name", color value)
->>>>>>> b63cc369aabd8dff1655d5e2dd1e898fe98e0a4a
