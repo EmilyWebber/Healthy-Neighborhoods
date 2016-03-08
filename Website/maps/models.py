@@ -6,6 +6,8 @@ import csv
 
 import sys
 
+import json
+
 from django.core.management import call_command
 
 from Analysis import correlations
@@ -70,6 +72,13 @@ def get_result_list(variable_1, variable_2):
 def get_neighborhood_dict():
 	neighborhood_dict = polygon_color.main()
 	return neighborhood_dict
+
+def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
+	for neighborhood in neighborhood_coord_dict:
+		neighborhood_coord_dict[neighborhood]["name"] = neighborhood
+		for name, color in neighborhood_list:
+			if name == neighborhood:
+				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps(color)
 
 '''
 class Neighborhood(models.Model):
