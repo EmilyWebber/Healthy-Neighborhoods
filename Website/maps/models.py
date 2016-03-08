@@ -75,7 +75,7 @@ def get_neighborhood_dict():
 
 def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
 	for neighborhood in neighborhood_coord_dict:
-		neighborhood_coord_dict[neighborhood]["name"] = neighborhood
+		neighborhood_coord_dict[neighborhood]["neighborhood"] = json.dumps(neighborhood)
 		for name, color in neighborhood_list:
 			if name == neighborhood:
 				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps(color)
