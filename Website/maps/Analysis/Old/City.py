@@ -81,7 +81,7 @@ class City:
         mean = float(sum(values) / len(values))
         low_mid = float((mean - low)/ 2)
         high_mid = float((high - mean) / 2)
-        print("{} -- low: {} low_mid: {} mean: {} high_mid: {} high: {}".format(header, low, low_mid, mean, high_mid, high))
+
         return [(low, low_mid), (low_mid, high_mid), (high_mid, high)]
 
 
