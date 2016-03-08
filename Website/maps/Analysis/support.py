@@ -4,9 +4,9 @@ colors = {0: "909090", 1:"E50008", 2: "C8011E", 3: "AB0235", 4:"8F034C", 5: "720
 
 
 color_matrix = {
-    ("low", DEFAULT_KEY): "#BCC6CC",
-    ("med", DEFAULT_KEY): "#98AFC7",
-    ("high", DEFAULT_KEY): "#6D7B8D",
+    ("low", DEFAULT_KEY): "#8F034C",
+    ("med", DEFAULT_KEY): "#C8011E",
+    ("high", DEFAULT_KEY): "#E50008",
     ("low", "low") : "#8F034C",  
     ("med", "low") : "#C8011E", 
     ("high", "low") : "#E50008", 
