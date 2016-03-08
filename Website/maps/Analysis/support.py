@@ -1,18 +1,21 @@
 DEFAULT_KEY = None
 
+colors = {0: "909090", 1:"E50008", 2: "C8011E", 3: "AB0235", 4:"8F034C", 5: "720463", 6: "55057A", 7:"390691", 8: "1C07A8", 9:"0008BF"}
+
+
 color_matrix = {
     ("low", DEFAULT_KEY): "#BCC6CC",
     ("med", DEFAULT_KEY): "#98AFC7",
     ("high", DEFAULT_KEY): "#6D7B8D",
-    ("low", "low") : "#BCC6CC",
-    ("med", "low") : "#98AFC7",
-    ("high", "low") : "#6D7B8D",
-    ("low", "med") : "#657383",
-    ("med", "med") : "#616D7E",
-    ("high", "med") : "#646D7E",
-    ("low", "high") : "#566D7E",
-    ("med", "high") : "#737CA1",
-    ("high", "high") : "#4863A0"
+    ("low", "low") : "#8F034C",  
+    ("med", "low") : "#C8011E", 
+    ("high", "low") : "#E50008", 
+    ("low", "med") : "#390691",
+    ("med", "med") : "#720463", 
+    ("high", "med") : "#AB0235", 
+    ("low", "high") : "#0008BF",   
+    ("med", "high") : "#1C07A8", 
+    ("high", "high") : "#720463", 
 }
 
 index_matrix = {
