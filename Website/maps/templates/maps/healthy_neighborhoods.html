@@ -124,12 +124,16 @@
           neighborhoodPolygon.setMap(map);
 
           
-          {% for neighborhood, coordinates in neighborhoods.items %}
+          {% for neighborhood, keys in neighborhoods.items %}
             //var name = {{neighborhood|safe}};
 
-            var arr = [];
+            var clr = {{keys.clr|safe}}
+
+
+
+            var coordinate_list = {{keys.cords|safe}};
             
-            var coordinate_list = {{coordinates.cords|safe}};
+            var arr = [];
             
             for (var i = 0; i < coordinate_list.length; i++) {
               arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
@@ -141,11 +145,11 @@
             // Looped polygon.
             var neighborhoodPolygon = new google.maps.Polygon({
               paths: arr,
-              strokeColor: '#FF0000',
-              strokeOpacity: 0.8,
+              strokeColor: 'dimgray',
+              strokeOpacity: .75,
               strokeWeight: 2,
-              fillColor: 'blue',
-              fillOpacity: 0.35,
+              fillColor: clr,
+              fillOpacity: .70,
             });
             neighborhoodPolygon.setMap(map);
             {% endfor %}
