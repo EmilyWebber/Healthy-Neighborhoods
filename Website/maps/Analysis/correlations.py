@@ -40,21 +40,28 @@ def assign_colors(xs, ys, rt, final):
 	# no y variables
 	if len(ys) == 0:
 		for name, x in rt:
-			for idx, (low, high) in enumerate(get_thresholds(xs)):
-				if (x >= low) and (x <= high):
-					x_id = support.index_matrix[idx]
-			rt.append((name, support.color_matrix[(m_idx, DEFAULT_KEY)]))
-		return rt
 
+			if x == None:
+				final.append((name, support.color_matrix[None]))
+			else:
+
+				for idx, (low, high) in enumerate(get_thresholds(xs)):
+					if (x >= low) and (x <= high):
+						x_id = support.index_matrix[idx]
+				final.append((name, support.color_matrix[(x_id, DEFAULT_KEY)]))
+		return final
 
 	for (name, x, y) in rt:
-		for idx, (low, high) in enumerate(get_thresholds(xs)):
-		 	if (x >= low) and (x <= high):
-		 		x_id = support.index_matrix[idx]
-		for idx, (low, high) in enumerate(get_thresholds(ys)):
-		 	if (y >= low) and (y <= high):
-		 		y_id = support.index_matrix[idx]
-		final.append((name, support.color_matrix[(x_id, y_id)]))
+		if (x == None) or (y == None):
+			final.append((name, support.color_matrix[None]))
+		else:
+			for idx, (low, high) in enumerate(get_thresholds(xs)):
+			 	if (x >= low) and (x <= high):
+			 		x_id = support.index_matrix[idx]
+			for idx, (low, high) in enumerate(get_thresholds(ys)):
+		 		if (y >= low) and (y <= high):
+		 			y_id = support.index_matrix[idx]
+			final.append((name, support.color_matrix[(x_id, y_id)]))
 
 
 	return (get_correlation_coefficient(xs, ys), final)
@@ -82,9 +89,8 @@ def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 	if var2 != None:
 		y = get_val(row[headers[var2]], ys)
 		rt.append((name, x, y))
-		if y != None:
+		if (y != None) and (x != None):
 			ys.append(y)
-		if x != None:
 			xs.append(x)
 	else:
 		rt.append((name, x))
@@ -98,7 +104,6 @@ def get_val(x, values_list):
 	If not, returns None
 	'''
 	try:
-		values_list.append(float(x))
 		return float(x)
 	except:
 		return None
