@@ -62,9 +62,3 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 py.image.save_as(fig, filename='scatter_plot.png')
 py.iplot(fig, filename='life-expectancy-per-GDP-2007')
-
-
-<div>
-    <a href="https://plot.ly/~trashpanda2000/2/" target="_blank" title="xpectancy v. Per Capita GDP, 2007" style="display: block; text-align: center;"><img src="https://plot.ly/~trashpanda2000/2.png" alt="xpectancy v. Per Capita GDP, 2007" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-    <script data-plotly="trashpanda2000:2"  src="https://plot.ly/embed.js" async></script>
-</div>
