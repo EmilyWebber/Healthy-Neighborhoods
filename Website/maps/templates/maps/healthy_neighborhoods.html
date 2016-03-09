@@ -9,7 +9,7 @@
       #map {
         width: 100%;
         height: 80%;
-        position: absolute;
+        position: fixed;
         left: 200px;
         top: 300px;
 
@@ -33,9 +33,7 @@
 
 
           {% for name, keys in neighborhoods.items %}
-            var name = {{keys.neighborhood|safe}};
             var clr = {{keys.clr|safe}};
-
 
             var coordinate_list = {{keys.cords|safe}};
             
@@ -43,8 +41,6 @@
             for (var i = 0; i < coordinate_list.length; i++) {
               arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
             }
-
-
     
             // Looped polygon.
             var neighborhoodPolygon = new google.maps.Polygon({
@@ -56,7 +52,7 @@
               fillOpacity: .70,
             });
             
-            getInfoWindow(neighborhoodPolygon, '<b>' + name + '</b>');
+            getInfoWindow(neighborhoodPolygon, {{keys.neighborhood|safe}});
             neighborhoodPolygon.setMap(map);
 
         
@@ -75,7 +71,7 @@
 
         function getInfoWindow(polygon, info) {
           polygon.infoWindow = new google.maps.InfoWindow({
-            content: info,
+            content: '<b>' + info + '</b>',
           });
           google.maps.event.addListener(polygon, 'click', function(event) {
             var latLng = event.latLng;
