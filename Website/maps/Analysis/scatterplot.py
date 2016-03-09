@@ -1,22 +1,15 @@
 
-## Graph takes a list of x values, y values, and x and y variables. 
+## Graph takes a list of x values, y values, and x and y variables
+## and list of values "text" for each value to demonstrate when clicked. 
 
-from correlations.py import *
+# from correlations.py import *
 import plotly.plotly as py
 py.sign_in('trashpanda2000','oxwvk6ndxa')
 import plotly.graph_objs as go
 
 trace0 = go.Scatter(
-    x=[12779.379640000001, 3822.1370840000004, 9065.800825, 36319.235010000004,
-       13171.63885, 7006.580419, 9645.06142, 8948.102923, 6025.374752000001,
-       6873.262326000001, 5728.353514, 5186.050003, 1201.637154,
-       3548.3308460000003, 7320.880262000001, 11977.57496, 2749.320965,
-       9809.185636, 4172.838464, 7408.905561, 19328.70901, 18008.50924,
-       42951.65309, 10611.46299, 11415.805690000001],
-    y=[75.32, 65.554, 72.39, 80.653, 78.553, 72.889, 78.782, 78.273, 72.235,
-       74.994, 71.878, 70.259, 60.916000000000004, 70.19800000000001, 72.567,
-       76.195, 72.899, 75.53699999999999, 71.752, 71.421, 78.74600000000001,
-       69.819, 78.242, 76.384, 73.747],
+    x=[],
+    y=[],
     mode='markers',
     marker=dict(size=12,
                 line=dict(width=1)
@@ -52,16 +45,16 @@ trace0 = go.Scatter(
 
 data = [trace0]
 layout = go.Layout(
-    title='Life Expectancy v. Per Capita GDP, 2007',
+    title= ,
     hovermode='closest',
     xaxis=dict(
-        title='GDP per capita (2000 dollars)',
+        title='',
         ticklen=5,
         zeroline=False,
         gridwidth=2,
     ),
     yaxis=dict(
-        title='Life Expectancy (years)',
+        title='',
         ticklen=5,
         gridwidth=2,
     ),
@@ -69,3 +62,9 @@ layout = go.Layout(
 fig = go.Figure(data=data, layout=layout)
 py.image.save_as(fig, filename='scatter_plot.png')
 py.iplot(fig, filename='life-expectancy-per-GDP-2007')
+
+
+<div>
+    <a href="https://plot.ly/~trashpanda2000/2/" target="_blank" title="xpectancy v. Per Capita GDP, 2007" style="display: block; text-align: center;"><img src="https://plot.ly/~trashpanda2000/2.png" alt="xpectancy v. Per Capita GDP, 2007" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
+    <script data-plotly="trashpanda2000:2"  src="https://plot.ly/embed.js" async></script>
+</div>
