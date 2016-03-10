@@ -4,46 +4,46 @@
 
 # from correlations.py import *
 import plotly.plotly as py
-py.sign_in('trashpanda2000','oxwvk6ndxa')
+py.sign_in('healthy_neighborhoods','d806djbyh8')
 import plotly.graph_objs as go
+# trace0 = 0
+# trace1 = 0 
+# trace2 = 0
+# trace3 = 0
+# trace4 = 0 
+# trace5 = 0
+# trace6 = 0
+# trace7 = 0
+# trace8 = 0
+
+
+COLORS = ["FF0000", "FF00FF"]
+
+l = [[[1, 2, 3], [2, 2, 2], ["Hyde_park", "Town 1", "town 2"]], [[3, 4], [7, 7], ["town3", "town4"]]]
+
+def scatter_plot(l, COLORS):
+  for i, val in enumerate(l):
+    color = COLORS[i]
+    x = val[0]
+    y = val[1]
+    text = val[2]
+    
+
 
 trace0 = go.Scatter(
-    x=[],
-    y=[],
+    x=[1, 2, 3, 4, 5, 6, 7],
+    y=[3, 5, 9, 10, 11, 12, 13],
     mode='markers',
-    marker=dict(size=12,
+     marker=dict(color="FF0000", size=12,
                 line=dict(width=1)
-               ),
-    name='Americas',
-    text=['Country: Argentina<br>Population: 40301927.0', 
-          'Country: Bolivia<br>Population: 9119152.0', 
-          'Country: Brazil<br>Population: 190010647.0', 
-          'Country: Canada<br>Population: 33390141.0', 
-          'Country: Chile<br>Population: 16284741.0', 
-          'Country: Colombia<br>Population: 44227550.0', 
-          'Country: Costa Rica<br>Population: 4133884.0', 
-          'Country: Cuba<br>Population: 11416987.0', 
-          'Country: Dominican Republic<br>Population: 9319622.0', 
-          'Country: Ecuador<br>Population: 13755680.0', 
-          'Country: El Salvador<br>Population: 6939688.0', 
-          'Country: Guatemala<br>Population: 12572928.0', 
-          'Country: Haiti<br>Population: 8502814.0', 
-          'Country: Honduras<br>Population: 7483763.0', 
-          'Country: Jamaica<br>Population: 2780132.0', 
-          'Country: Mexico<br>Population: 108700891.0', 
-          'Country: Nicaragua<br>Population: 5675356.0', 
-          'Country: Panama<br>Population: 3242173.0', 
-          'Country: Paraguay<br>Population: 6667147.0', 
-          'Country: Peru<br>Population: 28674757.0', 
-          'Country: Puerto Rico<br>Population: 3942491.0', 
-          'Country: Trinidad and Tobago<br>Population: 1056608.0', 
-          'Country: United States<br>Population: 301139947.0', 
-          'Country: Uruguay<br>Population: 3447496.0', 
-          'Country: Venezuela<br>Population: 26084662.0'],
+               ),      
+      # color='red',
+      name='Americas',
+      text=["testing", "t2", "t3", "t4", "t5", "t6"]
     )
 
 
-data = [trace0]
+data= [trace0]
 layout = go.Layout(
     title= "title goes here",
     hovermode='closest',
@@ -60,12 +60,7 @@ layout = go.Layout(
     ),
 )
 fig = go.Figure(data=data, layout=layout)
-<<<<<<< HEAD
-# py.image.save_as(fig, filename='scatter_plot.png')
-# py.iplot(fig, filename='life-expectancy-per-GDP-2007')
+py.image.save_as(fig, filename='testing_plot.png')
+# py.iplot(fig, filename='healthy-neighborhoods')
 
-
-=======
-py.image.save_as(fig, filename='scatter_plot.png')
-py.iplot(fig, filename='life-expectancy-per-GDP-2007')
->>>>>>> 9c5f822fa4157a5e52c5e428e9ea7fc2c06c0b24
+scatter_plot(l)
