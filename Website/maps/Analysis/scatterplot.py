@@ -66,7 +66,7 @@ def plot_graph(var1, var2):
     py.image.save_as(fig, filename='neighborhoods.png')
     py.iplot(fig, filename='healthy-neighborhoods')
   
-plot_graph("Gonorrhea in Females", "Below Poverty Level")
+
 
 # for Devin, new html embed  for website as of 03/09/2016
 # <div>
