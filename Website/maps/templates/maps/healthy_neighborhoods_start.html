@@ -11,8 +11,16 @@ p {
     font-size: 85%;
     position: absolute;
     margin-top: 0px;
-
 }
+
+#form-selection{
+	left: 25px;
+	padding-top: 0px;
+	position: relative;
+	min-width: 780
+}
+
+
 </style>
 </head>
 
@@ -20,12 +28,10 @@ p {
 
 <body>
 
-<div class = "form-selection">
+<div id = "form-selection">
 
 
 <h2>Select your variable: </h2>
-
-
 
 <form method ="post">
 	{% csrf_token %}
@@ -33,10 +39,14 @@ p {
 	<input type="submit" value="Submit"/>
 </form>
 
+
 <p>Choose <b>None</b> to display the range of a single variable.<p>
 
 
 </div>
+
+
+
 
 </body>
 

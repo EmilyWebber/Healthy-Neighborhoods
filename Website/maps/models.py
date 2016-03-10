@@ -23,7 +23,7 @@ def get_variables_choices():
 
 	with open(file_path, "rU") as f:
 		reader = csv.reader(f)
-		variables = f.next().strip().split(",")[2:]
+		variables = sorted(f.next().strip().split(",")[2:])
 
 		temp = [(x,x) for x in variables]
 	return temp
@@ -76,8 +76,3 @@ def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
 			if name == neighborhood:
 				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps(color)
 
-'''
-class Neighborhood(models.Model):
-	pass
-	##name = models.CharField(max_length = 200)
-'''
