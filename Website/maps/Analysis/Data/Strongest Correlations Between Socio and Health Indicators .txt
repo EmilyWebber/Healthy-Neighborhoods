@@ -1,0 +1,35 @@
+Strongest Correlations Between Socioeconomic Indicators and Health Indicators
+
+
+Below Poverty
+
+	(1) Childhood Blood Lead Level Screening : 0.7012
+
+
+
+Crowded Housing
+
+	(1) General Fertility Rate: 0.6558
+
+
+
+Dependency
+
+	(1) Firearm-Related: 0.5908
+
+
+
+No High School Diploma
+
+	(1) Childhood Blood Lead Level Screening: 0.75030
+
+
+
+Per Capita Income
+
+	(1) Tuberculosis: 0.27643
+
+
+Unemployment
+
+	(1) Assault Homicide: 0.8148
