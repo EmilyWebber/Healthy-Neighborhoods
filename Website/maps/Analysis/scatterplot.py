@@ -60,7 +60,15 @@ layout = go.Layout(
     ),
 )
 fig = go.Figure(data=data, layout=layout)
+<<<<<<< HEAD
 py.image.save_as(fig, filename='testing_plot.png')
 # py.iplot(fig, filename='healthy-neighborhoods')
 
 scatter_plot(l)
+=======
+
+
+py.image.save_as(fig, filename='scatter_plot.png')
+py.iplot(fig, filename='life-expectancy-per-GDP-2007')
+
+>>>>>>> 0b1a9e423f97c40f07c56dc480251e92fca2a82e
