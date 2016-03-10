@@ -16,7 +16,6 @@ FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
-
 def get_lists(var1, var2):
 	'''
 	Takes two variable strings
@@ -34,7 +33,6 @@ def get_lists(var1, var2):
 			add_to_lists(row, xs, ys, rt, headers, var1, var2)
 	return xs, ys, rt
 
-
 def google_maps(var1, var2):
 	'''
 	Takes two variables, 
@@ -44,26 +42,53 @@ def google_maps(var1, var2):
 	xs, ys, rt = get_lists(var1, var2)
 	return assign_colors(xs, ys, rt, [])
 
-
-
-
-
 def get_correlation_coefficient(xs, ys):
 	'''
 	Takes both xs and ys, finds the correlation coefficient and adds to final list
 	'''
 	return np.corrcoef(xs, ys)[1,0]
 
-def get_scatter_array(variable_1, variable_2):
+def initialize_scatter():
+	rt = []
+	for i in range(9):
+		l = []
+		for j in range(3):
+			l.append([])
+		rt.append(l)
+	return rt
+
+def get_scatter_array(var1, var2):
  	'''
  	Is called by scatterplot.py
  		Returns an array and a list
  	'''
- 	return
+ 	if var2 == None:
+ 		var2 = var1
 
+ 	xs, ys, rt = get_lists(var1, var2)
+ 	scatter = initialize_scatter()
 
+ 	# only add neighborhood to array if both x and y are not None
+ 	for (name, x, y) in rt:
+ 		if (x != None) and (y != None):
+ 			inner = scatter[get_color(x, y, xs, ys, True)]
+ 			inner[0].append(x)
+ 			inner[1].append(y)
+ 			inner[2].append(name)
+ 			print (inner)
+ 	return scatter
 
+def get_color(x, y, xs, ys, scatter = False):
 
+    for idx, (low, high) in enumerate(get_thresholds(xs)):
+    	if (x >= low) and (x <= high):
+    		x_id = support.index_matrix[idx]
+    for idx, (low, high) in enumerate(get_thresholds(ys)):
+    	if (y >= low) and (y <= high):
+    		y_id = support.index_matrix[idx]
+    if not scatter:
+    	return support.color_matrix[(x_id, y_id)]
+    return support.scatter_matrix[(x_id, y_id)]
 
 def assign_colors(xs, ys, rt, final):
 	'''
@@ -81,27 +106,19 @@ def assign_colors(xs, ys, rt, final):
 				for idx, (low, high) in enumerate(get_thresholds(xs)):
 					if (x >= low) and (x <= high):
 						x_id = support.index_matrix[idx]
-
 		
 				final.append((name, support.color_matrix[(x_id, DEFAULT_KEY)]))
 		
 		return final
 
 	for (name, x, y) in rt:
+
 		if (x == None) or (y == None):
 			final.append((name, support.color_matrix[None]))
 		else:
-			for idx, (low, high) in enumerate(get_thresholds(xs)):
-			 	if (x >= low) and (x <= high):
-			 		x_id = support.index_matrix[idx]
-			for idx, (low, high) in enumerate(get_thresholds(ys)):
-		 		if (y >= low) and (y <= high):
-		 			y_id = support.index_matrix[idx]
-		 	
-			final.append((name, support.color_matrix[(x_id, y_id)]))
+			final.append((name, get_color(x, y, xs, ys, False)))
 
 	return (get_correlation_coefficient(xs, ys), final)
-
 
 def get_thresholds(xs):
 	'''
@@ -112,7 +129,6 @@ def get_thresholds(xs):
 	m1 = (high-low)/3 + low
 	m2 = 2 * (high - low)/3 + low
 	return [(low, m1), (m1, m2), (m2, high)]
-
 
 def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 	'''
@@ -133,7 +149,6 @@ def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 		if x != None:
 			xs.append(x)
 
-
 def get_val(x, values_list):
 	'''
 	Takes a measurement from the row, tries to convert to float and add to values_list
@@ -144,14 +159,14 @@ def get_val(x, values_list):
 	except:
 		return None
 
-
 def main(variable_1, variable_2 = None):
 	return google_maps(variable_1, variable_2)
-
 
 if __name__ == "__main__":
 	if len(sys.argv) != 3:
 	    sys.exit(1)
 
-	print(google_maps(sys.argv[1],sys.argv[2]))
+	# print(google_maps(sys.argv[1],sys.argv[2]))
+
+	get_scatter_array(sys.argv[1],sys.argv[2])
 
