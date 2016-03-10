@@ -18,11 +18,38 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         
         <title>Healthy Neighborhoods</title>
+    
+
+    <style>
+
+
+
+    h1{
+        color: white;
+
+        font-family: 'Rubik', sans-serif;
+
+        margin-bottom: 0px;
+    }
+    h4 {
+        color: white;
+
+        font-family: 'Rubik', sans-serif;
+
+        text-align: right;
+        margin-right: 15px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+
+    </style>
     </head>
 
     <body>
         <div class = "page-header">
-            <h1>Healthy Neighborhoods</h1>
+                    <a href = "{% url 'home' %}" style="text-decoration:none"><h1>Healthy Neighborhoods</h1></a>
+                    <a href = "{% url 'documentation' %}" style="text-decoration:none"><h4>Documentation</h4></a>
         </div>
     
 
