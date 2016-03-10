@@ -16,15 +16,37 @@ FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
-def go(var1, var2, rt, xs, ys, headers):
+
+def get_lists(var1, var2):
+	'''
+	Takes two variable strings
+	Returns a list of xs, ys, and a list of tuples (name, x)
+	'''
+	xs = []
+	ys = []
+	rt = []
+	headers = {}
 	with open (FILE,'rU') as f:
 		fields = csv.reader(f)
 		for i, e in enumerate(next(fields)):
 			headers[e] = i
 		for row in fields:
 			add_to_lists(row, xs, ys, rt, headers, var1, var2)
+	return xs, ys, rt
 
+
+def google_maps(var1, var2):
+	'''
+	Takes two variables, 
+	Returns a tuple
+		( correlation coefficient, list of tuples)
+	'''
+	xs, ys, rt = get_lists(var1, var2)
 	return assign_colors(xs, ys, rt, [])
+
+
+
+
 
 def get_correlation_coefficient(xs, ys):
 	'''
@@ -32,12 +54,23 @@ def get_correlation_coefficient(xs, ys):
 	'''
 	return np.corrcoef(xs, ys)[1,0]
 
+def get_scatter_array(variable_1, variable_2):
+ 	'''
+ 	Is called by scatterplot.py
+ 		Returns an array and a list
+ 	'''
+ 	return
+
+
+
+
 
 def assign_colors(xs, ys, rt, final):
 	'''
 	Takes a list of tuples, assigns the correct color
 	'''
 	# no y variables
+
 	if len(ys) == 0:
 		for name, x in rt:
 
@@ -48,7 +81,10 @@ def assign_colors(xs, ys, rt, final):
 				for idx, (low, high) in enumerate(get_thresholds(xs)):
 					if (x >= low) and (x <= high):
 						x_id = support.index_matrix[idx]
+
+		
 				final.append((name, support.color_matrix[(x_id, DEFAULT_KEY)]))
+		
 		return final
 
 	for (name, x, y) in rt:
@@ -61,8 +97,8 @@ def assign_colors(xs, ys, rt, final):
 			for idx, (low, high) in enumerate(get_thresholds(ys)):
 		 		if (y >= low) and (y <= high):
 		 			y_id = support.index_matrix[idx]
+		 	
 			final.append((name, support.color_matrix[(x_id, y_id)]))
-
 
 	return (get_correlation_coefficient(xs, ys), final)
 
@@ -110,12 +146,12 @@ def get_val(x, values_list):
 
 
 def main(variable_1, variable_2 = None):
-	return go(variable_1, variable_2, [], [], [], {})
+	return google_maps(variable_1, variable_2)
 
 
 if __name__ == "__main__":
 	if len(sys.argv) != 3:
 	    sys.exit(1)
 
-	print(go(sys.argv[1],sys.argv[2], [], [], [], {}))
+	print(google_maps(sys.argv[1],sys.argv[2]))
 
