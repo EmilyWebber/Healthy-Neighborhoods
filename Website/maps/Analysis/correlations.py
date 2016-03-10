@@ -71,12 +71,12 @@ def get_scatter_array(var1, var2):
  	# only add neighborhood to array if both x and y are not None
  	for (name, x, y) in rt:
  		if (x != None) and (y != None):
+ 			# print ("assigning to ninth quadrant {}".format(get_color(x, y, xs, ys, True)))
  			inner = scatter[get_color(x, y, xs, ys, True)]
  			inner[0].append(x)
  			inner[1].append(y)
  			inner[2].append(name)
- 			print (inner)
- 	return scatter
+ 	return scatter, support.scatter_color_list
 
 def get_color(x, y, xs, ys, scatter = False):
 
@@ -168,5 +168,5 @@ if __name__ == "__main__":
 
 	# print(google_maps(sys.argv[1],sys.argv[2]))
 
-	get_scatter_array(sys.argv[1],sys.argv[2])
+	print (get_scatter_array(sys.argv[1],sys.argv[2]))
 

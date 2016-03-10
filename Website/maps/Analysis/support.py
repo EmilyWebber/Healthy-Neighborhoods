@@ -14,7 +14,7 @@ color_matrix = {
     ("high", "med") : "#AB0235", 
     ("low", "high") : "#0008BF",   
     ("med", "high") : "#1C07A8", 
-    ("high", "high") : "#720463",
+    ("high", "high") : "#55057A",
     None:  "#B5B5B5"
 }
 
@@ -39,3 +39,4 @@ scatter_matrix = {
     ("high", "high") : 8,
 }
 
+scatter_color_list = ["#8F034C", "#C8011E", "#E50008", "#390691","#720463","#AB0235","#0008BF","#1C07A8","#55057A"]
