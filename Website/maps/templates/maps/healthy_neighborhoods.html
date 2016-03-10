@@ -7,36 +7,77 @@
  <!-- Map -->
     <style>
       
-           #scatter-plot {
-        width: 45%;
-        height: 500px;
-        top: 30px;
+      #scatter-plot {
+        width: 40%;
         display: inline-block;
         border-style: solid;
-      }
+        border-color: #174757;
+        position: absolute;
+        margin-left: 1%;
+        margin-right: 3%;
 
+      }
 
 
 
       #map {
         width: 45%;
-        height: 800px;
-        padding-left: 8%;
+
+        height: 750px;
+        padding-left: 100px;
         border-style: solid;
+        border-color: #174757;
         display: inline-block;
+
+        position: absolute;
       }
 
+      #graphs {
+        position: relative;
+ 
+        padding-top: 50px;
+        min-width: 815
+      }
+
+      .p1 {
+        position: absolute;
+        display: inline-block;
+        text-align: center;
+        padding-top: 100px;
+      }
+
+      #documentation{
+        padding-top: 50px;
+      }
+
+      img {
+        padding: 5px;
+      }
 
     </style>
 
 
 <body>
 
+  <div id = "graphs">
 
     <div id = "scatter-plot">
+
         <a href="https://plot.ly/~trashpanda2000/2/" target="_blank" title="xpectancy v. Per Capita GDP, 2007" style="display: block; text-align: center;"><img src="https://plot.ly/~trashpanda2000/2.png" alt="xpectancy v. Per Capita GDP, 2007" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
         <script data-plotly="trashpanda2000:2"  src="https://plot.ly/embed.js" async></script>
+   
+        {% if coef != "1.000" %}
+          <p1>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is: </p1> <span class ="bold red">{{coef}}</span></p>
+
+        {% endif %}
+
+
+
+
+
     </div>
+
+
 
 
 
@@ -46,7 +87,7 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
-          center: {lat: 41.847, lng: -87.642},
+          center: {lat: 41.84, lng: -87.68},
           mapTypeId: google.maps.MapTypeId.TERRAIN
         });
 
@@ -75,14 +116,6 @@
             getInfoWindow(neighborhoodPolygon, {{keys.neighborhood|safe}});
             neighborhoodPolygon.setMap(map);
 
-        
-            // Add a listener for the click event.
-            //google.maps.event.addListener(neighborhoodPolygon, 'click', function (event) {
-            //  var latLng = event.latLng;
-            //  neighborhoodPolygon.infoWindow.setPosition(event.latLng);
-            //  polygon.infoWindow.open(map);
-            //  alert(this.neighborhood);
-          //});
 
 
             {% endfor %}
@@ -111,46 +144,21 @@
                                           //API keyL AIzaSyCVBQupglb_52iL3cHJO5ee-AiqHRCsoXU
     </script>
 
+  </div>
 
 
 
-<!--
-
-  {% if coef != "1.000" %}
-    <p>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is {{coef}}.</p>
-  {% endif %}
+  <div id = "documentation">
     <p> Here is the color matrix: </p>
-    <img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" id = color-matrix/>
+    <img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" width = "300" height = "250"/>
+  </div>
 
--->
+
+
   </body>
 
-<!-- Dropdown bar -->
 
-<!--
-	<div class = "dropdown">
-		<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle = "dropdown" >Variable 1
-		<span class ="caret"></span></button>
-		</button>
-		<ul class="dropdown-menu">
-			{% for variable in form %}
-				<li>{{variable}}</li>
-			{% endfor %}
-		</ul>
-	</div>
--->
-<!--
-<div class="btn-group">
-         <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
-           <span data-bind="label">Select One</span>
-         </button>
-         <ul class="dropdown" role="menu">
-             {% for variable in form %}
-                 <li>{{ variable }}</li>
-             {% endfor %}
-         </ul>
-      </div>
--->
+</html>
 
 {% endblock %}
 
