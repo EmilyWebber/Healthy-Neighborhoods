@@ -1,0 +1,59 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+
+<html>
+
+<head>
+<style>
+
+
+
+.form-selection{
+	margin-left: 25px;
+	margin-bottom: 0px;
+
+
+
+}
+
+
+body {
+  font-family: Helvetica, sans-serif;
+
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+</style>
+</head>
+
+
+
+<body>
+
+<div class = "form-selection">
+
+  <h2>Documentation & Motivation: </h2>
+    <p> Here is where we talk a little about what we did. <p>
+
+    <p> Here is our color matrix</p>
+
+
+ 
+
+
+
+
+
+</div>
+
+   <img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" width = "250" height = "200" class = "color-matrix"/>
+
+</body>
+</html>
+
+{% endblock %}

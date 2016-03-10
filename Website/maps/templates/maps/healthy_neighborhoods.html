@@ -1,4 +1,4 @@
-{% include 'maps/healthy_neighborhoods_start.html' %}
+{% extends 'maps/base.html' %}
 {% load staticfiles %}
 
 {% block body %}
@@ -23,20 +23,23 @@
       #map {
         width: 45%;
 
-        height: 750px;
+        height: 700px;
         padding-left: 100px;
         border-style: solid;
         border-color: #174757;
         display: inline-block;
 
         position: absolute;
+
       }
 
       #graphs {
         position: relative;
  
         padding-top: 50px;
-        min-width: 815
+        min-width: 815;
+
+        float both;
       }
 
       .p1 {
@@ -46,18 +49,61 @@
         padding-top: 100px;
       }
 
-      #documentation{
-        padding-top: 50px;
+
+      p {
+      font-size: 85%;
+      position: absolute;
+      margin-top: 0px;
       }
 
-      img {
-        padding: 5px;
-      }
+
+
+body {
+  font-family: Helvetica, sans-serif;
+
+}
+
+p {
+  font-size: 90%;
+    margin-top: -10px;
+}
+
+p1 {
+  font-size: 90%
+}
+
+.form-selection{
+  margin-left: 25px;
+  margin-bottom: 60px;
+
+  min-width: 900px;
+}
+
+
+.color-matrix {
+  float: right;
+}
 
     </style>
 
 
 <body>
+
+<div class = "form-selection">
+
+
+<h2>Select your variable: </h2>
+
+<form method ="post" class = "dropdown">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" value="Submit" class ="submit-button"/>
+</form>
+
+
+<p>Choose <b>None</b> to display the range of a single variable.<p>
+
+</div>
 
   <div id = "graphs">
 
@@ -67,7 +113,7 @@
         <script data-plotly="trashpanda2000:2"  src="https://plot.ly/embed.js" async></script>
    
         {% if coef != "1.000" %}
-          <p1>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is: </p1> <span class ="bold red">{{coef}}</span></p>
+          <p1>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is: <span class ="bold red">{{coef}}</span></p1>
 
         {% endif %}
 
@@ -147,11 +193,6 @@
   </div>
 
 
-
-  <div id = "documentation">
-    <p> Here is the color matrix: </p>
-    <img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" width = "300" height = "250"/>
-  </div>
 
 
 
