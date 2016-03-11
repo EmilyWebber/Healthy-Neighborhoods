@@ -54,8 +54,7 @@ def get_result_list(variable_1, variable_2):
 
 	##import correlations
 
-	variable_2 = None if variable_1 == variable_2 else variable_2
-	variable_2 = None if variable_2 == "None" else variable_2
+	variable_2 = variable_1 if variable_2 == "None" else variable_2
 	##print(correlations.main(variable_1, variable_2))
 
 

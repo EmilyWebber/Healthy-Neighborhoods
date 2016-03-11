@@ -1,7 +1,7 @@
 
 ## Graph takes a list of x values, y values, and x and y variables
 ## and list of values "text" for each value to demonstrate when clicked. 
-from correlations import get_scatter_array
+
 import plotly.plotly as py
 py.sign_in('healthy_neighborhoods','d806djbyh8')
 import plotly.graph_objs as go
@@ -66,11 +66,8 @@ def plot_graph(var1, var2):
     py.image.save_as(fig, filename='neighborhoods.png')
     py.iplot(fig, filename='healthy-neighborhoods')
   
-<<<<<<< HEAD
+
 plot_graph(var1, var2)
-=======
-# plot_graph("Below Poverty Level", "Below Poverty Level")
->>>>>>> b3417668bea478ef3b44bc39e79f224735faf2f5
 
 # for Devin, new html embed  for website as of 03/09/2016
 # <div>

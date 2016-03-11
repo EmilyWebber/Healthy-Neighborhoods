@@ -13,6 +13,12 @@ base_path = os.path.dirname(__file__)
 FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 ##FILE = 'Data/city_health_stats.csv'
 
+
+import scatterplot
+
+
+
+
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
@@ -96,7 +102,7 @@ def assign_colors(xs, ys, rt, final):
 	'''
 	# no y variables
 
-	if len(ys) == 0:
+	if xs == ys:
 		for name, x in rt:
 
 			if x == None:
@@ -160,13 +166,14 @@ def get_val(x, values_list):
 		return None
 
 def main(variable_1, variable_2 = None):
-	
+	scatterplot.plot_graph(variable_1, variable_2)
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
 	'''
 	Takes two variable names and returns the correlation coefficient
 	'''
+
 	xs, ys, rt = get_lists(var1, var2)
 	return get_correlation_coefficient(xs, ys)
 
