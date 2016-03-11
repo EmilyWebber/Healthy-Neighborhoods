@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 ##from django.db import models
 from django import forms
+
 import os
 import csv
 
@@ -14,14 +15,15 @@ from . import correlations
 from . import polygon_color
 
 
-
-
 def get_variables_choices():
-	file_path = str(os.path.abspath(os.path.join(os.path.dirname(__file__), "static/maps/city_health_stats.csv" )))
-
-	with open('static/maps/city_health_stats.csv', "rU") as f:
+	path = (os.path.dirname(os.path.abspath(__file__)))
+		#, "static/maps/city_health_stats.csv" )))
+	file_path = path +'/static/maps/city_health_stats.csv'
+	#os.path.join(settings.STATIC_ROOT, 'maps/city_health_stats.csvs')
+	print(file_path)
+	with open(str(file_path), "r") as f:
 		reader = csv.reader(f)
-		variables = sorted(f.next().strip().split(",")[2:])
+		variables = sorted(f.readline().strip().split(",")[2:])
 
 		temp = [(x,x) for x in variables]
 	return temp
