@@ -15,11 +15,15 @@ for i in open(SOCIO_FILE, 'r').readlines():
 for i in open(HEALTH_FILE, 'r').readlines():
 	health.append(i.strip('\n'))
 
-# get the top 3 health indicators with strongest correlations
-def ranking_algo():
+
+
+def suggest_an_indicator_algo(var1, type, strength):
+	'''
+	Takes 
+	'''
 	for s in socio:
 
-		top_health_correlations = [(0,0), (0,0), (0,0)]
+		top_health_correlations = (0,0)
 		
 		for h in health:
 

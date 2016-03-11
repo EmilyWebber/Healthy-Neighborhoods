@@ -1,10 +1,6 @@
 Strongest Correlations Between Socioeconomic Indicators and Health Indicators
 
 
-Below Poverty
-
-	(1) Childhood Blood Lead Level Screening : 0.7012
-
 
 
 Crowded Housing
@@ -30,6 +26,25 @@ Per Capita Income
 	(1) Tuberculosis: 0.27643
 
 
-Unemployment
 
-	(1) Assault Homicide: 0.8148
+Stories
+
+- 
+
+
+- Per capita income & Assault Homicide
+
+		(1) Assault Homicide: 0.8148
+
+
+
+
+- Poverty and Childhood Lead: A Constant Correlation
+
+	the strongest absolute value correlation with below poverty is childhood blood lead level
+
+	Interpretation: For every one percentage point increase in homes below poverty within the neighborhood, childhood blood lead level screening increases by 0.7012 points. 
+
+
+	(1) Childhood Blood Lead Level Screening : 0.7012
+
