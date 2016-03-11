@@ -178,10 +178,11 @@ def create_trace(i, val, colors):
     x= x_vals,
     y= y_vals,
     mode='markers',
-     marker=dict(color=color, size=12,
+    marker=dict(color=color, size=12,
                 line=dict(width=1)
-               ),      
-      text=neighborhoods)
+               ), 
+      text=neighborhoods,
+      name="")
     return trace
 
 def plot_graph(var1, var2):

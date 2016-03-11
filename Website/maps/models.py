@@ -20,7 +20,7 @@ def get_variables_choices():
 		#, "static/maps/city_health_stats.csv" )))
 	file_path = path +'/static/maps/city_health_stats.csv'
 	#os.path.join(settings.STATIC_ROOT, 'maps/city_health_stats.csvs')
-	print(file_path)
+
 	with open(str(file_path), "r") as f:
 		reader = csv.reader(f)
 		variables = sorted(f.readline().strip().split(",")[2:])
@@ -70,7 +70,6 @@ def get_neighborhood_dict():
 def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
 	for neighborhood in neighborhood_coord_dict:
 		neighborhood_coord_dict[neighborhood]["neighborhood"] = json.dumps(neighborhood)
-		print ("at this point neighborhood_list is ", neighborhood_list)
 		for name, color in neighborhood_list:
 			if name == neighborhood:
 				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps(color)

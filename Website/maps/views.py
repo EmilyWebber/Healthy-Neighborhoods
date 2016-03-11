@@ -19,7 +19,7 @@ def healthy_neighborhoods(request):
 	##c = {"form": form,}
 
 	form = models.Variable()
-	c = {"form": form, "map": False}
+	c = {"form": form}
 	if request.method == "POST":
 		if "ex1" in request.POST:
 			v1 = "Below Poverty Level"
@@ -38,8 +38,7 @@ def healthy_neighborhoods(request):
 		
 		c["variables"] = [v1.lower(), v2.lower()]
 
-		print("{} : {}".format(v1, v2))
-		c["map"] = True
+
 		##print(models.get_result_list(v1, v2))
 
 		if v1 == v2 or v2 == "None":
@@ -48,7 +47,7 @@ def healthy_neighborhoods(request):
 			coef, neighborhood_list = models.get_result_list(v1, v2)
 
 		c["coef"] = '{0:.3f}'.format(coef)
-		print(c["coef"])
+
 
 			##neighborhood_coord_dict = models.get_neighborhood_dict()
 
