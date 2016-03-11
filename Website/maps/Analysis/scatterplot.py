@@ -67,7 +67,7 @@ def plot_graph(var1, var2):
     py.iplot(fig, filename='healthy-neighborhoods')
   
 
-plot_graph(var1, var2)
+    plot_graph(var1, var2)
 
 # for Devin, new html embed  for website as of 03/09/2016
 # <div>
