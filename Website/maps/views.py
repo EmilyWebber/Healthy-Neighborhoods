@@ -23,13 +23,13 @@ def healthy_neighborhoods(request):
 	if request.method == "POST":
 		if "ex1" in request.POST:
 			v1 = "Below Poverty Level"
-			v2 = "Childhood Lead Poisoning"
+			v2 = "Childhood Blood Lead Level Screening"
 		elif "ex2" in request.POST:
 			v1= "Assault (Homicide)"
 			v2 = "Per Capita Income"
 		elif "ex3" in request.POST:
-			v1 = "Gonorrhea in Females"
-			v2 = "Gonorrhea in Males"
+			v1 = "Dependency"
+			v2 = "Firearm-related"
 		else:
 			form = models.Variable(request.POST)
 			if form.is_valid():
