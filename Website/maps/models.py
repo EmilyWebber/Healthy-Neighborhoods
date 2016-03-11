@@ -19,7 +19,7 @@ from . import polygon_color
 def get_variables_choices():
 
 
-	with open(file_path, "rU") as f:
+	with open('static/maps/city_health_stats.csv', "rU") as f:
 		reader = csv.reader(f)
 		variables = sorted(f.next().strip().split(",")[2:])
 
