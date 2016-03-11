@@ -10,16 +10,14 @@ import json
 
 from django.core.management import call_command
 
-from Analysis import correlations
-from Mapping import polygon_color
+from . import correlations
+from . import polygon_color
 
 
-base_path = os.path.dirname(__file__)
-#file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/")))
 
 
 def get_variables_choices():
-	file_path = str(os.path.abspath(os.path.join(base_path, "Analysis/Data/city_health_stats.csv" )))
+
 
 	with open(file_path, "rU") as f:
 		reader = csv.reader(f)
