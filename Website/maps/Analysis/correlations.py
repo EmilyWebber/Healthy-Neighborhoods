@@ -14,7 +14,7 @@ FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 ##FILE = 'Data/city_health_stats.csv'
 
 
-import scatterplot
+# import scatterplot
 
 
 

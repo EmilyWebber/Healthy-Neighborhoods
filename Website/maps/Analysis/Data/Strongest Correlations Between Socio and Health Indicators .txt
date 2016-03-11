@@ -43,7 +43,9 @@ Stories
 
 	the strongest absolute value correlation with below poverty is childhood blood lead level
 
-	Interpretation: For every one percentage point increase in homes below poverty within the neighborhood, childhood blood lead level screening increases by 0.7012 points. 
+	lead is particularly dangerous for children; it can lead to behavioral and learning problems, slowed growth, hearing difficulties, headaches, seizures, and a host of very dangerous side effects.  The City of Chicago 
+
+	Interpretation: For every one percentage point increase in the rate of homes below poverty within the neighborhood, the screening score for childhood blood lead level is associated with an increase in 0.7012 points. 
 
 
 	(1) Childhood Blood Lead Level Screening : 0.7012

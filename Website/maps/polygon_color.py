@@ -10,9 +10,10 @@ import json
 
 import os
 
-#base_path = os.path.dirname(__file__)
-#FILE = os.path.abspath(os.path.join(base_path, "CommAreas.csv"))
 
+base_path = os.path.dirname(__file__)
+FILE = base_path + "/static/maps/CommAreas.csv"
+#FILE = "CommAreas.csv"
 
 def community_dict (filename):
     '''
