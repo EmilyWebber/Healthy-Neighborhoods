@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 ##from django.db import models
 from django import forms
+
 import os
 import csv
 
@@ -10,20 +11,19 @@ import json
 
 from django.core.management import call_command
 
-from Analysis import correlations
-from Mapping import polygon_color
-
-
-base_path = os.path.dirname(__file__)
-#file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/")))
+from . import correlations
+from . import polygon_color
 
 
 def get_variables_choices():
-	file_path = str(os.path.abspath(os.path.join(base_path, "Analysis/Data/city_health_stats.csv" )))
-
-	with open(file_path, "rU") as f:
+	path = (os.path.dirname(os.path.abspath(__file__)))
+		#, "static/maps/city_health_stats.csv" )))
+	file_path = path +'/static/maps/city_health_stats.csv'
+	#os.path.join(settings.STATIC_ROOT, 'maps/city_health_stats.csvs')
+	print(file_path)
+	with open(str(file_path), "r") as f:
 		reader = csv.reader(f)
-		variables = sorted(f.next().strip().split(",")[2:])
+		variables = sorted(f.readline().strip().split(",")[2:])
 
 		temp = [(x,x) for x in variables]
 	return temp
@@ -54,8 +54,7 @@ def get_result_list(variable_1, variable_2):
 
 	##import correlations
 
-	variable_2 = None if variable_1 == variable_2 else variable_2
-	variable_2 = None if variable_2 == "None" else variable_2
+	variable_2 = var if variable_2 == "None" else variable_2
 	##print(correlations.main(variable_1, variable_2))
 
 

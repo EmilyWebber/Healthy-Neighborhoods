@@ -1,20 +1,19 @@
 import csv
 import sys
-import support
+
 import numpy as np
 
-FILE = 'Data/city_health_stats.csv'
+#FILE = 'Data/city_health_stats.csv'
 
-import support
 import numpy as np
 import os
 
-base_path = os.path.dirname(__file__)
-FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
-##FILE = 'Data/city_health_stats.csv'
+##base_path = os.path.dirname(__file__)
+##FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
+FILE = 'static/maps/city_health_stats.csv'
 
-
-import scatterplot
+from . import support
+from . import scatterplot
 
 
 
