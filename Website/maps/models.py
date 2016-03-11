@@ -58,8 +58,7 @@ def get_result_list(variable_1, variable_2):
 	variable_2 = None if variable_2 == "None" else variable_2
 	##print(correlations.main(variable_1, variable_2))
 
-	print(variable_1)
-	print(variable_2)
+
 	neighborhood_list = correlations.main(variable_1, variable_2)
 	return neighborhood_list
 	##file_path = os.path.abspath(os.path.join(base_path, "..", "..", "Analysis/correlations.py" ))

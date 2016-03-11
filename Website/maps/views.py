@@ -22,11 +22,11 @@ def healthy_neighborhoods(request):
 	c = {"form": form, "map": False}
 	if request.method == "POST":
 		if "ex1" in request.POST:
-			v1 = "Assault (Homicide)"
-			v2 = "Infant Mortality Rate"
+			v1 = "Below Poverty Level"
+			v2 = "Childhood Lead Poisoning"
 		elif "ex2" in request.POST:
-			v1= "Birth Rate"
-			v2 = "Dependency"
+			v1= "Assault (Homicide)"
+			v2 = "Per Capita Income"
 		elif "ex3" in request.POST:
 			v1 = "Gonorrhea in Females"
 			v2 = "Gonorrhea in Males"
