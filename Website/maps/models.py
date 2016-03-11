@@ -17,7 +17,7 @@ from . import polygon_color
 
 
 def get_variables_choices():
-
+	file_path = str(os.path.abspath(os.path.join(os.path.dirname(__file__), "static/maps/city_health_stats.csv" )))
 
 	with open('static/maps/city_health_stats.csv', "rU") as f:
 		reader = csv.reader(f)
@@ -52,7 +52,7 @@ def get_result_list(variable_1, variable_2):
 
 	##import correlations
 
-	variable_2 = variable_1 if variable_2 == "None" else variable_2
+	variable_2 = var if variable_2 == "None" else variable_2
 	##print(correlations.main(variable_1, variable_2))
 
 
