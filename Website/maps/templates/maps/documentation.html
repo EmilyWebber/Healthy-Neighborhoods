@@ -18,15 +18,25 @@
 
 }
 
+.matrix {
+	display: block;
+	margin-right: 30px;
+	float: left;
+	margin-top: 0px;
+
+}
+
 
 body {
   font-family: Helvetica, sans-serif;
 
 }
 
-p {
+.part {
 	margin-bottom: 20px;
+	clear: right;
 }
+
 
 </style>
 </head>
@@ -38,12 +48,20 @@ p {
 <div class = "form-selection">
 
   <h2>Documentation & Motivation: </h2>
-    <p> Here is where we talk a little about what we did. <p>
+    <div class = "part"> It is well documented that health measures tend to be highly correlated – whether through causal mechanisms (e.g. preterm births and low birth weight) or confounding variables (smoking elevates the risk of both stroke and lung cancer). Likewise, health has a strong societal component: individuals in economically disadvantaged areas often lack access to health services and report overall poorer health behaviors and outcomes.</div>
 
-    <p> Here is our color matrix</p>
+    <div class = "part">The goal of <b>Healthy Neighborhoods</b>, then, is a more careful examination of these relationship between health and socioeconomic indicators in the city of Chicago.<div>
+
+    <p>To begin this analysis, we pulled 27 public health variables from the City of Chicago’s open data portal for each of the city’s 77 community areas. We divide each variable’s range into thirds, and, for every user-entered variable pair, construct a color relationship matrix (see below).<p>
 
 
- 
+
+   <div class = matrix><img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" width = "350" height = "300" class = "color-matrix" align = "middle"/></div>
+
+
+    <div class = "part">Areas for which data is missing on one or both variables appear as gray. In this way, each neighborhood is classified in the two-dimensional space of either selected variable’s range. From these rankings, we construct a scatter plot and geographic heat map.</div>
+
+    <div class = "part">Looking at these visuals, a user can identify correlations between health and socioeconomic indicators. Moreover, by mapping the interactions of two variables, user can look for areas of concentrated disadvantage in the city, as well as neighborhoods that exhibit anomalous interactions. These relationships form a foundation from which a narrative of public health opportunities and outcomes can be built.</div>
 
 
 
@@ -51,7 +69,6 @@ p {
 
 </div>
 
-   <img src="{% static "maps/color_matrix.png" %}" alt = "Color matrix" width = "250" height = "200" class = "color-matrix"/>
 
 </body>
 </html>
