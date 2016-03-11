@@ -54,7 +54,7 @@ def get_result_list(variable_1, variable_2):
 
 	##import correlations
 
-	variable_2 = var if variable_2 == "None" else variable_2
+	variable_2 = variable_1 if variable_2 == "None" else variable_2
 	##print(correlations.main(variable_1, variable_2))
 
 
@@ -70,6 +70,7 @@ def get_neighborhood_dict():
 def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
 	for neighborhood in neighborhood_coord_dict:
 		neighborhood_coord_dict[neighborhood]["neighborhood"] = json.dumps(neighborhood)
+		print ("at this point neighborhood_list is ", neighborhood_list)
 		for name, color in neighborhood_list:
 			if name == neighborhood:
 				neighborhood_coord_dict[neighborhood]["clr"] = json.dumps(color)

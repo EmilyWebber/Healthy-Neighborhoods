@@ -39,7 +39,7 @@ def plot_graph(var1, var2):
     output: Creates a trace for each of 9 lists , append to data file and creating scatterplot 
   
     '''
-    scatter, colors = get_scatter_array(var1, var2)
+    scatter, colors = correlations.get_scatter_array(var1, var2)
     graph_title = var1 + ' vs ' + var2
     data = []
     for i, val in enumerate(scatter):
@@ -74,3 +74,5 @@ def plot_graph(var1, var2):
 #     <a href="https://plot.ly/~healthy_neighborhoods/0/" target="_blank" title="Gonorrhea in Females vs Below Poverty Level" style="display: block; text-align: center;"><img src="https://plot.ly/~healthy_neighborhoods/0.png" alt="Gonorrhea in Females vs Below Poverty Level" style="max-width: 100%;width: 974px;"  width="974" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
 #     <script data-plotly="healthy_neighborhoods:0"  src="https://plot.ly/embed.js" async></script>
 # </div>
+
+import correlations
