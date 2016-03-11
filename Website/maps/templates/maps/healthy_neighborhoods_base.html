@@ -1,0 +1,45 @@
+{% extends 'maps/base.html' %}
+{% load staticfiles %}
+
+{% block body %}
+
+<html>
+<head>
+    <style>
+        #selection-bar {
+            margin-left: 25px;
+            margin-bottom: 60px;
+            min-width: 900px;
+        }
+        #button {
+            width: 30%;
+            margin-right: 2%;
+            font-size: 115%;
+            height: 35px;
+        }
+        body {
+            font-family: Helvetica, sans-serif;
+        }
+        p {
+            font-size: 90%;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="selection-bar">
+        <h2>Select your variable: </h2>
+
+        <form method="post" class="dropdown">
+            {% csrf_token %} {{form}}
+            <input type="submit" value="Submit" class="submit-button" />
+        </form>
+
+        <p>Choose <b>None</b> to display the range of a single variable.</p>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}
