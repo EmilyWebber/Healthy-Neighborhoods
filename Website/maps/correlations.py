@@ -8,15 +8,21 @@ import numpy as np
 import numpy as np
 import os
 
+
+path = (os.path.dirname(os.path.abspath(__file__)))
+		#, "static/maps/city_health_stats.csv" )))
+FILE = path +'/static/maps/city_health_stats.csv'
 ##base_path = os.path.dirname(__file__)
 ##FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
-FILE = 'static/maps/city_health_stats.csv'
+##FILE = 'static/maps/city_health_stats.csv'
 
 from . import support
-from . import scatterplot
 
+import plotly.plotly as py
+py.sign_in('healthy_neighborhoods','d806djbyh8')
+import plotly.graph_objs as go
 
-
+VALUES = ["var0", "var1", "var2","var3", "var4", "var5", "var6", "var7", "var8"]
 
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
@@ -99,31 +105,16 @@ def assign_colors(xs, ys, rt, final):
 	'''
 	Takes a list of tuples, assigns the correct color
 	'''
-	# no y variables
-
-	if xs == ys:
-		for name, x in rt:
-
-			if x == None:
-				final.append((name, support.color_matrix[None]))
-			else:
-
-				for idx, (low, high) in enumerate(get_thresholds(xs)):
-					if (x >= low) and (x <= high):
-						x_id = support.index_matrix[idx]
-		
-				final.append((name, support.color_matrix[(x_id, DEFAULT_KEY)]))
-		
-		return final
-
 	for (name, x, y) in rt:
 
 		if (x == None) or (y == None):
 			final.append((name, support.color_matrix[None]))
 		else:
 			final.append((name, get_color(x, y, xs, ys, False)))
-
-	return (get_correlation_coefficient(xs, ys), final)
+	coeff = get_correlation_coefficient(xs, ys)
+	if coeff == 1.000:
+		return final
+	return (coeff, final)
 
 def get_thresholds(xs):
 	'''
@@ -141,20 +132,14 @@ def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 	Adds to lists appropriately
 	'''
 	name = row[1]
-	x = get_val(row[headers[var1]], xs)
+	x = get_val(row[headers[var1]])
+	y = get_val(row[headers[var2]])
+	rt.append((name, x, y))
+	if (y != None) and (x != None):
+		ys.append(y)
+		xs.append(x)
 
-	if var2 != None:
-		y = get_val(row[headers[var2]], ys)
-		rt.append((name, x, y))
-		if (y != None) and (x != None):
-			ys.append(y)
-			xs.append(x)
-	else:
-		rt.append((name, x))
-		if x != None:
-			xs.append(x)
-
-def get_val(x, values_list):
+def get_val(x):
 	'''
 	Takes a measurement from the row, tries to convert to float and add to values_list
 	If not, returns None
@@ -165,23 +150,71 @@ def get_val(x, values_list):
 		return None
 
 def main(variable_1, variable_2 = None):
-	scatterplot.plot_graph(variable_1, variable_2)
+	plot_graph(variable_1, variable_2)
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
 	'''
 	Takes two variable names and returns the correlation coefficient
 	'''
-
 	xs, ys, rt = get_lists(var1, var2)
 	return get_correlation_coefficient(xs, ys)
 
-if __name__ == "__main__":
-	if len(sys.argv) != 3:
-	    sys.exit(1)
 
-	# print(google_maps(sys.argv[1],sys.argv[2]))
+def create_trace(i, val, colors):
+    '''
+    Takes index, list of X, Y, and neighborhood values and creates a trace object
+    with color
+    '''
 
-	# print (get_scatter_array(sys.argv[1],sys.argv[2]))
+    trace = VALUES[i]
+    color = colors[i]
+    x_vals = val[0]
+    if len(x_vals) == 0:
+        return None
+    y_vals = val[1]
+    neighborhoods = val[2]
+    trace = go.Scatter(
+    x= x_vals,
+    y= y_vals,
+    mode='markers',
+     marker=dict(color=color, size=12,
+                line=dict(width=1)
+               ),      
+      text=neighborhoods)
+    return trace
 
-	# compare(sys.argv[1],sys.argv[2])
+def plot_graph(var1, var2):
+    '''
+    input: Receives two string variables from django
+         Receives scatter, list of 9 lists, each interior list with an x, y, and neighborhood get_scatter_array 
+         Receives colors, an ordered list corresponding with the interior lists of scatter
+    output: Creates a trace for each of 9 lists , append to data file and creating scatterplot 
+    '''
+    scatter, colors = get_scatter_array(var1, var2)
+    graph_title = var1 + ' vs ' + var2
+    data = []
+    for i, val in enumerate(scatter):
+        trace = create_trace(i, val, colors)
+        if trace:
+          data.append(trace)
+    layout = go.Layout(
+    showlegend=False,
+    title= graph_title,
+    hovermode='closest',
+    xaxis=dict(
+        title=var1,
+        ticklen=5,
+        zeroline=False,
+        gridwidth=2,
+    ),
+    yaxis=dict(
+        title=var2,
+        ticklen=5,
+        gridwidth=2,
+    ),
+  )
+    fig = go.Figure(data=data, layout=layout)
+    py.image.save_as(fig, filename='neighborhoods.png')
+    py.iplot(fig, filename='healthy-neighborhoods')
+ 
