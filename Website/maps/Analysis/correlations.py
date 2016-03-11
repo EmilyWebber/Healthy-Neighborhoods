@@ -37,7 +37,7 @@ def google_maps(var1, var2):
 	'''
 	Takes two variables, 
 	Returns a tuple
-		( correlation coefficient, list of tuples)
+		(correlation coefficient, list of tuples)
 	'''
 	xs, ys, rt = get_lists(var1, var2)
 	return assign_colors(xs, ys, rt, [])
@@ -163,11 +163,19 @@ def main(variable_1, variable_2 = None):
 	
 	return google_maps(variable_1, variable_2)
 
+def compare(var1, var2):
+	'''
+	Takes two variable names and returns the correlation coefficient
+	'''
+	xs, ys, rt = get_lists(var1, var2)
+	return get_correlation_coefficient(xs, ys)
+
 if __name__ == "__main__":
 	if len(sys.argv) != 3:
 	    sys.exit(1)
 
 	# print(google_maps(sys.argv[1],sys.argv[2]))
 
-	print (get_scatter_array(sys.argv[1],sys.argv[2]))
+	# print (get_scatter_array(sys.argv[1],sys.argv[2]))
 
+	# compare(sys.argv[1],sys.argv[2])
