@@ -174,7 +174,7 @@ def compare(var1, var2):
 	Takes two variable names and returns the correlation coefficient
 	'''
 
-	xs, ys, rt = get_lists(var1, var2)
+
 	return get_correlation_coefficient(xs, ys)
 
 if __name__ == "__main__":

@@ -150,7 +150,11 @@ def get_val(x):
 		return None
 
 def main(variable_1, variable_2 = None):
+<<<<<<< HEAD
+	#scatterplot.plot_graph(variable_1, variable_2)
+=======
 	plot_graph(variable_1, variable_2)
+>>>>>>> 36a7d1ea529096f86ef200a38340af3b0bdba29b
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
