@@ -4,12 +4,12 @@ import numpy as np
 import numpy as np
 import os
 from . import color_support
-import plotly.plotly as py
-import plotly.graph_objs as go
+##import plotly.plotly as py
+##import plotly.graph_objs as go
 
 path = (os.path.dirname(os.path.abspath(__file__)))
 FILE = path +'/static/maps/Data/city_health_stats.csv'
-py.sign_in('healthy_neighborhoods','d806djbyh8')
+#py.sign_in('healthy_neighborhoods','d806djbyh8')
 VALUES = ["var0", "var1", "var2","var3", "var4", "var5", "var6", "var7", "var8"]
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
@@ -136,14 +136,14 @@ def get_val(x):
 
 def main(variable_1, variable_2 = None):
 
-	plot_graph(variable_1, variable_2)
+	#plot_graph(variable_1, variable_2)
 
-	plot_graph(variable_1, variable_2)
+	#plot_graph(variable_1, variable_2)
 	#scatterplot.plot_graph(variable_1, variable_2)
-	plot_graph(variable_1, variable_2)
+	#plot_graph(variable_1, variable_2)
 
 
-	plot_graph(variable_1, variable_2)
+	#plot_graph(variable_1, variable_2)
 
 	return google_maps(variable_1, variable_2)
 

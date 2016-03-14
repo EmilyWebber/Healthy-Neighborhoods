@@ -3,92 +3,53 @@
 
 {% block body %}
 
-    <style>
-      
+<html>
+<head>
+  <style>
       #scatter-plot {
-        width: 40%;
-        display: inline-block;
-        border-style: solid;
-        border-color: #174757;
-        position: absolute;
-        margin-left: 1%;
-        margin-right: 3%;
+          width: 40%;
+          margin-left: 1%;
+          margin-right: 3%;
+          position: absolute;
+          display: inline-block;
+          border-style: solid;
+          border-color: #174757;
       }
-
       #map {
-        width: 45%;
-
-        height: 700px;
-        padding-left: 100px;
-        border-style: solid;
-        border-color: #174757;
-        display: inline-block;
-
-        position: absolute;
+          height: 700px;
+          width: 45%;
+          padding-left: 100px;
+          position: absolute;
+          display: inline-block;
+          border-style: solid;
+          border-color: #174757;
       }
-
-      #container {
-        margin-top: -40px;
-        position: relative;
- 
-        padding-top: 50px;
-        min-width: 815;
-
-      }
-
-      .p1 {
-        position: absolute;
-        display: inline-block;
-        text-align: center;
-        padding-top: 100px;
-      }
-
-body {
-  font-family: Helvetica, sans-serif;
-
-}
-
-p {
-  font-size: 90%;
-    margin-top: -10px;
-}
-p1 {
-  font-size: 90%
-}
+      #graphic-container {
+         margin-top: -40px;
+          padding-top: 50px;
+          position: relative;
+          min-width: 815;
+        }
     </style>
-
+</head>
 
 <body>
-
-
-
-  <div id="container">
+  <div id="graphic-container">
 
     <div id="scatter-plot">
-
+      <!-- Grab dynamic scatterplot from plotly -->
       <a href="https://plot.ly/~healthy_neighborhoods/0/" target="_blank" title="Gonorrhea in Females vs Below Poverty Level" style="display: block; text-align: center;">
-        <img src="https://plot.ly/~healthy_neighborhoods/0.png" alt="Gonorrhea in Females vs Below Poverty Level" style="max-width: 100%;width: 974px;" width="974" onerror="this.onerror=null;this.src='https://plot.ly/404.png';"/></a>
-    <script data-plotly="healthy_neighborhoods:0" src="https://plot.ly/embed.js" async></script>
+      <img src="https://plot.ly/~healthy_neighborhoods/0.png" alt="Gonorrhea in Females vs Below Poverty Level" style="max-width: 100%;width: 974px;" width="974" onerror="this.onerror=null;this.src='https://plot.ly/404.png';"/></a>
+      <script data-plotly="healthy_neighborhoods:0" src="https://plot.ly/embed.js" async></script>
 
-   
+        <!-- Display correlation coefficient -->
         {% if coef != "1.000" %}
-          <p1>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is: <span class ="bold red">{{coef}}</span></p1>
-
+          <p1>The correlation coefficient between <b>{{variables.0}}</b> and <b>{{variables.1}}</b> is: <b><font color = "#800000">{{coef}}</font></b></p1>
         {% endif %}
-
-
-
-
-
     </div>
 
-
-
-
-
-    <div id = "map"></div>
+    <div id="map"></div>
     <script>
-
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
@@ -97,39 +58,34 @@ p1 {
         });
 
 
-
-          {% for name, keys in neighborhoods.items %}
-            var clr = {{keys.clr|safe}};
-
-            var coordinate_list = {{keys.cords|safe}};
+        {% for name, keys in neighborhoods.items %}
+          var clr = {{keys.clr|safe}};
+          var coordinate_list = {{keys.cords|safe}};
             
-            var arr = [];           
-            for (var i = 0; i < coordinate_list.length; i++) {
-              arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
-            }
+          var arr = [];           
+          for (var i = 0; i < coordinate_list.length; i++) {
+            arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
+          }
     
-            // Construct polygon
-            var neighborhoodPolygon = new google.maps.Polygon({
-              paths: arr,
-              strokeColor: 'dimgray',
-              strokeOpacity: .75,
-              strokeWeight: 2,
-              fillColor: clr,
-              fillOpacity: .70,
-            });
+          // Construct neighborhood polygon
+          var neighborhoodPolygon = new google.maps.Polygon({
+            paths: arr,
+            strokeColor: 'dimgray',
+            strokeOpacity: .75,
+            strokeWeight: 2,
+            fillColor: clr,
+            fillOpacity: .70,
+          });
             
-            getInfoWindow(neighborhoodPolygon, {{keys.neighborhood|safe}});
-            neighborhoodPolygon.setMap(map);
+          getInfoWindow(neighborhoodPolygon, {{keys.neighborhood|safe}});
+          neighborhoodPolygon.setMap(map);
+          
+        {% endfor %}
 
-
-
-            {% endfor %}
-
-
-
-        function getInfoWindow(polygon, info) {
+        // Add neighborhood name marker to polygon
+        function getInfoWindow(polygon, name) {
           polygon.infoWindow = new google.maps.InfoWindow({
-            content: '<b>' + info + '</b>',
+            content: '<b>' + name + '</b>',
           });
           google.maps.event.addListener(polygon, 'click', function(event) {
             var latLng = event.latLng;
@@ -137,31 +93,14 @@ p1 {
             polygon.infoWindow.open(map);
           });
         }
-
-
-
       }
     </script>
-      
-
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVBQupglb_52iL3cHJO5ee-AiqHRCsoXU&callback=initMap">
-    //Google API key: AIzaSyCVBQupglb_52iL3cHJO5ee-AiqHRCsoXU
-    </script>
+    
+    <!-- Google Maps key -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVBQupglb_52iL3cHJO5ee-AiqHRCsoXU&callback=initMap"/></script>
 
   </div>
-
-
-
-
-
-  </body>
-
-
+</body>
 </html>
 
 {% endblock %}
-
-
-
-<!--http://www.cleancss.com/css-beautify/-->
