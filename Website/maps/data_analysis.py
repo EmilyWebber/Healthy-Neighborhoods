@@ -3,17 +3,12 @@ import sys
 import numpy as np
 import os
 from . import color_support
-##import plotly.plotly as py
-##import plotly.graph_objs as go
+import plotly.plotly as py
+import plotly.graph_objs as go
 
 path = (os.path.dirname(os.path.abspath(__file__)))
 FILE = path +'/static/maps/Data/city_health_stats.csv'
-<<<<<<< HEAD
-#py.sign_in('healthy_neighborhoods','d806djbyh8')
-VALUES = ["var0", "var1", "var2","var3", "var4", "var5", "var6", "var7", "var8"]
-DEFAULT_KEY = None
-DEFAULT_VALUE = []
-=======
+
 py.sign_in('healthy_neighborhoods','d806djbyh8')
 
 DEFAULT = None
@@ -24,7 +19,6 @@ COLS = 3
 X_ID = 0
 Y_ID = 1
 NAME_ID = 2
->>>>>>> 1ebe21e84e043aacfa37293a3aa52b3b6e6e971d
 
 def get_lists(var1, var2):
 	'''
@@ -162,22 +156,7 @@ def get_val(x):
 	try:
 		return float(x)
 	except:
-<<<<<<< HEAD
-		return None
-
-def main(variable_1, variable_2 = None):
-
-	#plot_graph(variable_1, variable_2)
-
-	#plot_graph(variable_1, variable_2)
-	#scatterplot.plot_graph(variable_1, variable_2)
-	#plot_graph(variable_1, variable_2)
-
-
-	#plot_graph(variable_1, variable_2)
-=======
 		return DEFAULT
->>>>>>> 1ebe21e84e043aacfa37293a3aa52b3b6e6e971d
 
 def main(variable_1, variable_2 = DEFAULT):
     '''
