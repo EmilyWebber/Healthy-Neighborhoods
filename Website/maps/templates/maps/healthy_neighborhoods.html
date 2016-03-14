@@ -5,7 +5,7 @@
 
 <html>
 <head>
-  <style>
+    <style>
       #scatter-plot {
           width: 40%;
           margin-left: 1%;
@@ -37,7 +37,7 @@
   <div id="graphic-container">
 
     <div id="scatter-plot">
-      <!-- Grab dynamic scatterplot from plotly -->
+      <!-- Get dynamic scatterplot from Plotly -->
       <a href="https://plot.ly/~healthy_neighborhoods/0/" target="_blank" title="Gonorrhea in Females vs Below Poverty Level" style="display: block; text-align: center;">
       <img src="https://plot.ly/~healthy_neighborhoods/0.png" alt="Gonorrhea in Females vs Below Poverty Level" style="max-width: 100%;width: 974px;" width="974" onerror="this.onerror=null;this.src='https://plot.ly/404.png';"/></a>
       <script data-plotly="healthy_neighborhoods:0" src="https://plot.ly/embed.js" async></script>
@@ -49,6 +49,7 @@
     </div>
 
     <div id="map"></div>
+    <!-- Create Google Map -->
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -57,11 +58,11 @@
           mapTypeId: google.maps.MapTypeId.TERRAIN
         });
 
-
+        // Iterate through neighborhood dictionary
         {% for name, keys in neighborhoods.items %}
           var clr = {{keys.clr|safe}};
           var coordinate_list = {{keys.cords|safe}};
-            
+          // Iterate through coordinate pairs
           var arr = [];           
           for (var i = 0; i < coordinate_list.length; i++) {
             arr.push(new google.maps.LatLng(coordinate_list[i][0], coordinate_list[i][1]));
@@ -79,7 +80,6 @@
             
           getInfoWindow(neighborhoodPolygon, {{keys.neighborhood|safe}});
           neighborhoodPolygon.setMap(map);
-          
         {% endfor %}
 
         // Add neighborhood name marker to polygon
