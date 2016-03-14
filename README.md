@@ -12,3 +12,6 @@ https://docs.google.com/document/d/1bp4peNHxVyWs_Vg9kCtkTzJGqBRb-ejcQmlKnwEuiv8/
 
 Presentation:
 https://docs.google.com/presentation/d/1J2pvvc-qbDQdTnJbEbQt7Xx7Zh1wwgyArGSHP-7P1fw/edit?usp=sharing
+
+Readme Text:
+https://docs.google.com/document/d/1aBzpF5wKeoam1SQrwqy-HW38tyzxYJ1kRNb810umiZE/edit?usp=sharing

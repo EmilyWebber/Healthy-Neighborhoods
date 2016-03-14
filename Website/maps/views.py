@@ -36,15 +36,11 @@ def healthy_neighborhoods(request):
 		
 		c["variables"] = [var_1.lower(), var_2.lower()]
 
-
-		## Case perfectly correlated variables ("None" or same variable selected)
-		if var_1 == var_2 or var_2 == "None":
-			coef, neighborhood_list = (1, forms.get_result_list(var_1, var_2))
-		else:
-			coef, neighborhood_list = forms.get_result_list(var_1, var_2)
+		coef, neighborhood_list = forms.get_result_list(var_1, var_2)
 
 		c["coef"] = '{0:.3f}'.format(coef)
 
+		## Add color identifiers to neighborhood dictionaries
 		forms.get_combo_dict(neighborhood_list, neighborhood_coord_dict)
 
 		return render(request, "maps/healthy_neighborhoods.html", c)

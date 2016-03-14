@@ -1,7 +1,6 @@
 import csv
 import sys
 import numpy as np
-import numpy as np
 import os
 from . import color_support
 import plotly.plotly as py
@@ -9,15 +8,28 @@ import plotly.graph_objs as go
 
 path = (os.path.dirname(os.path.abspath(__file__)))
 FILE = path +'/static/maps/Data/city_health_stats.csv'
+
 py.sign_in('healthy_neighborhoods','d806djbyh8')
-VALUES = ["var0", "var1", "var2","var3", "var4", "var5", "var6", "var7", "var8"]
-DEFAULT_KEY = None
-DEFAULT_VALUE = []
+
+DEFAULT = None
+
+# necessary specifications to fit plotly matrix
+ROWS = 9
+COLS = 3
+X_ID = 0
+Y_ID = 1
+NAME_ID = 2
 
 def get_lists(var1, var2):
 	'''
 	Takes two variable strings
-	Returns a list of xs, ys, and a list of tuples (name, x)
+	Returns three lists:
+        xs: list of floats 
+        ys: list of floats
+        rt: list of tuples (name, x, y)
+    Xs and ys will not have any DEFAULT, but rt has DEFAULT for every missing values in the csv 
+        Which is used to generate gray color in google maps
+        But each of them needs to be skipped for the scatter array
 	'''
 	xs = []
 	ys = []
@@ -46,38 +58,51 @@ def get_correlation_coefficient(xs, ys):
 	'''
 	return np.corrcoef(xs, ys)[1,0]
 
-def initialize_scatter():
-	rt = []
-	for i in range(9):
-		l = []
-		for j in range(3):
-			l.append([])
-		rt.append(l)
-	return rt
+def initialize_scatter(rt):
+    '''
+    Takes an empty list, 
+    Initializes a 9-3 array
+    '''
+    for i in range(ROWS):
+        l = []
+        for j in range(COLS):
+            l.append([])
+        rt.append(l)
+    return rt
 
 def get_scatter_array(var1, var2):
  	'''
- 	Is called by scatterplot.py
- 		Returns an array and a list
+    Takes two variables from plot_graph
+ 		Returns an array and a list of colors
+            scatter: a 9-3 array built to match plotly specifications
+            list of colors: list of strings, where the index space of each color matches
+                the index space of the correct color quadrant, 0-8
  	'''
- 	if var2 == None:
+    # if the second variable is default, overwrite it as the first
+ 	if var2 == DEFAULT:
  		var2 = var1
 
  	xs, ys, rt = get_lists(var1, var2)
- 	scatter = initialize_scatter()
-
- 	# only add neighborhood to array if both x and y are not None
+ 	scatter = initialize_scatter([])
  	for (name, x, y) in rt:
- 		if (x != None) and (y != None):
- 			# print ("assigning to ninth quadrant {}".format(get_color(x, y, xs, ys, True)))
+
+        # only add a value to the scatter array if the measurement is not DEFAULT,
+        # which means the observation is actually present for that variable
+
+ 		if (x != DEFAULT) and (y != DEFAULT):
  			inner = scatter[get_color(x, y, xs, ys, True)]
- 			inner[0].append(x)
- 			inner[1].append(y)
- 			inner[2].append(name)
+ 			inner[X_ID].append(x)
+ 			inner[Y_ID].append(y)
+ 			inner[NAME_ID].append(name)
  	return scatter, color_support.scatter_color_list
 
 def get_color(x, y, xs, ys, scatter = False):
-
+    '''
+    Takes one x observation, one y observation, a list of x measurements and a list of y measurements,
+        and a boolean value for whether or not the color should match the scatter plot array
+        Walks through the short list of thresholds for the x observation and the y observation
+    Returns a single string that corresponds to the correct color for that neighborhood
+    '''
     for idx, (low, high) in enumerate(get_thresholds(xs)):
     	if (x >= low) and (x <= high):
     		x_id = color_support.index_matrix[idx]
@@ -94,12 +119,11 @@ def assign_colors(xs, ys, rt, final):
 	'''
 	for (name, x, y) in rt:
 
-		if (x == None) or (y == None):
-			final.append((name, color_support.color_matrix[None]))
+		if (x == DEFAULT) or (y == DEFAULT):
+			final.append((name, color_support.color_matrix[DEFAULT]))
 		else:
 			final.append((name, get_color(x, y, xs, ys, False)))
-	coeff = get_correlation_coefficient(xs, ys)
-	return (coeff, final)
+	return (get_correlation_coefficient(xs, ys), final)
 
 def get_thresholds(xs):
 	'''
@@ -120,7 +144,7 @@ def add_to_lists(row, xs, ys, rt, headers, var1, var2):
 	x = get_val(row[headers[var1]])
 	y = get_val(row[headers[var2]])
 	rt.append((name, x, y))
-	if (y != None) and (x != None):
+	if (y != DEFAULT) and (x != DEFAULT):
 		ys.append(y)
 		xs.append(x)
 
@@ -132,50 +156,49 @@ def get_val(x):
 	try:
 		return float(x)
 	except:
-		return None
+		return DEFAULT
 
-def main(variable_1, variable_2 = None):
-
-	plot_graph(variable_1, variable_2)
-
-	plot_graph(variable_1, variable_2)
-	#scatterplot.plot_graph(variable_1, variable_2)
-	plot_graph(variable_1, variable_2)
-
-
-	plot_graph(variable_1, variable_2)
-
-	return google_maps(variable_1, variable_2)
+def main(variable_1, variable_2 = DEFAULT):
+    '''
+    How this file interacts with Django framework
+    Takes two variables that are passed from user input
+    Calls plot_graph
+    And returns google maps data structure
+    '''
+    plot_graph(variable_1, variable_2)
+    return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
 	'''
 	Takes two variable names and returns the correlation coefficient
+    Useful for systematically comparing lists of variables
+    We used this in generating some of our analysis,
+        such as finding the strongest health correlation for each economic indicator
+    But it's not explicitly tied to the website visualizations
 	'''
 	xs, ys, rt = get_lists(var1, var2)
 	return get_correlation_coefficient(xs, ys)
 
-
 def create_trace(i, val, colors):
     '''
-    Takes index, list of X, Y, and neighborhood values and creates a trace object
-    with color
+    Takes index, list of X, Y, and neighborhood values and creates a trace object with color
     '''
-    trace = VALUES[i]
+    trace = "var" + str(i)
     color = colors[i]
-    x_vals = val[0]
+    x_vals = val[X_ID]
     if len(x_vals) == 0:
         return None
-    y_vals = val[1]
-    neighborhoods = val[2]
+    y_vals = val[Y_ID]
+    neighborhoods = val[NAME_ID]
     trace = go.Scatter(
-    x= x_vals,
-    y= y_vals,
-    mode='markers',
-    marker=dict(color=color, size=12,
-                line=dict(width=1)
+    x = x_vals,
+    y = y_vals,
+    mode = 'markers',
+    marker = dict(color = color, size = 12,
+                line = dict(width = 1)
                ), 
-      text=neighborhoods,
-      name="")
+      text = neighborhoods,
+      name = "")
     return trace
 
 def plot_graph(var1, var2):
@@ -185,29 +208,35 @@ def plot_graph(var1, var2):
          Receives colors, an ordered list corresponding with the interior lists of scatter
     output: Creates a trace for each of 9 lists , append to data file and creating scatterplot 
     '''
-
     scatter, colors = get_scatter_array(var1, var2)
     graph_title = var1 + ' vs ' + var2
     data = []
+
     for i, val in enumerate(scatter):
         trace = create_trace(i, val, colors)
         if trace:
           data.append(trace)
     layout = go.Layout(
-    showlegend=False,
-    title= graph_title,
-    hovermode='closest',
-    xaxis=dict(
-        title=var1,
-        ticklen=5,
-        zeroline=False,
-        gridwidth=2,
+    showlegend = False,
+    title = graph_title,
+    hovermode = 'closest',
+    xaxis = dict(
+        title = var1,
+        ticklen = 5,
+        zeroline = False,
+        gridwidth = 2,
     ),
-    yaxis=dict(
-        title=var2,
-        ticklen=5,
-        gridwidth=2,
+    yaxis = dict(
+        title = var2,
+        ticklen = 5,
+        gridwidth = 2,
     ),
   )
+<<<<<<< HEAD
     fig = go.Figure(data=data, layout=layout)
     py.iplot(fig, filename='healthy-neighborhoods')
+=======
+    fig = go.Figure(data = data, layout = layout)
+    py.image.save_as(fig, filename ='neighborhoods.png')
+    py.iplot(fig, filename = 'healthy-neighborhoods')
+>>>>>>> b4a735abadf1f5bd203dc1f23b3477cbfcb3066a
