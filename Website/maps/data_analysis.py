@@ -139,6 +139,12 @@ def main(variable_1, variable_2 = None):
 	plot_graph(variable_1, variable_2)
 
 	plot_graph(variable_1, variable_2)
+	#scatterplot.plot_graph(variable_1, variable_2)
+	plot_graph(variable_1, variable_2)
+
+
+	plot_graph(variable_1, variable_2)
+
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
