@@ -151,14 +151,12 @@ def get_val(x):
 		return None
 
 def main(variable_1, variable_2 = None):
-<<<<<<< HEAD:Website/maps/correlations.py
 	#scatterplot.plot_graph(variable_1, variable_2)
 	plot_graph(variable_1, variable_2)
-=======
+
 
 	plot_graph(variable_1, variable_2)
 
->>>>>>> b04f48ab02c310e8d347be115172a3498f30de61:Website/maps/data_analysis.py
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
