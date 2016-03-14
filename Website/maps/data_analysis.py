@@ -77,7 +77,7 @@ def get_scatter_array(var1, var2):
             list of colors: list of strings, where the index space of each color matches
                 the index space of the correct color quadrant, 0-8
  	'''
-    # if the second variable is default, equate it with the first
+    # if the second variable is default, overwrite it as the first
  	if var2 == DEFAULT:
  		var2 = var1
 

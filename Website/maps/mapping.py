@@ -1,13 +1,11 @@
 # function to turn Community CSV into a dictionary
 
-
 import csv
 import re
 import os
 
 COORD = 0
 COMM = 6
-
 
 base_path = os.path.dirname(__file__)
 FILE = base_path + "/static/maps/Data/CommAreas.csv"
