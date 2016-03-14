@@ -210,5 +210,4 @@ def plot_graph(var1, var2):
     ),
   )
     fig = go.Figure(data=data, layout=layout)
-    py.image.save_as(fig, filename='neighborhoods.png')
     py.iplot(fig, filename='healthy-neighborhoods')
