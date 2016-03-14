@@ -1,7 +1,5 @@
 DEFAULT_KEY = None
 
-colors = {0: "909090", 1:"E50008", 2: "C8011E", 3: "AB0235", 4:"8F034C", 5: "720463", 6: "55057A", 7:"390691", 8: "1C07A8", 9:"0008BF"}
-
 color_matrix = {
     ("low", DEFAULT_KEY): "#8F034C",
     ("med", DEFAULT_KEY): "#C8011E",

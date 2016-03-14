@@ -8,15 +8,16 @@ import numpy as np
 import numpy as np
 import os
 
+from . import color_support
+
 
 path = (os.path.dirname(os.path.abspath(__file__)))
 		#, "static/maps/city_health_stats.csv" )))
-FILE = path +'/static/maps/city_health_stats.csv'
+FILE = path +'/static/maps/Data/city_health_stats.csv'
 ##base_path = os.path.dirname(__file__)
 ##FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
 ##FILE = 'static/maps/city_health_stats.csv'
 
-from . import support
 
 import plotly.plotly as py
 py.sign_in('healthy_neighborhoods','d806djbyh8')
@@ -87,19 +88,19 @@ def get_scatter_array(var1, var2):
  			inner[0].append(x)
  			inner[1].append(y)
  			inner[2].append(name)
- 	return scatter, support.scatter_color_list
+ 	return scatter, color_support.scatter_color_list
 
 def get_color(x, y, xs, ys, scatter = False):
 
     for idx, (low, high) in enumerate(get_thresholds(xs)):
     	if (x >= low) and (x <= high):
-    		x_id = support.index_matrix[idx]
+    		x_id = color_support.index_matrix[idx]
     for idx, (low, high) in enumerate(get_thresholds(ys)):
     	if (y >= low) and (y <= high):
-    		y_id = support.index_matrix[idx]
+    		y_id = color_support.index_matrix[idx]
     if not scatter:
-    	return support.color_matrix[(x_id, y_id)]
-    return support.scatter_matrix[(x_id, y_id)]
+    	return color_support.color_matrix[(x_id, y_id)]
+    return color_support.scatter_matrix[(x_id, y_id)]
 
 def assign_colors(xs, ys, rt, final):
 	'''
@@ -108,7 +109,7 @@ def assign_colors(xs, ys, rt, final):
 	for (name, x, y) in rt:
 
 		if (x == None) or (y == None):
-			final.append((name, support.color_matrix[None]))
+			final.append((name, color_support.color_matrix[None]))
 		else:
 			final.append((name, get_color(x, y, xs, ys, False)))
 	coeff = get_correlation_coefficient(xs, ys)
@@ -150,8 +151,14 @@ def get_val(x):
 		return None
 
 def main(variable_1, variable_2 = None):
+<<<<<<< HEAD:Website/maps/correlations.py
 	#scatterplot.plot_graph(variable_1, variable_2)
 	plot_graph(variable_1, variable_2)
+=======
+
+	plot_graph(variable_1, variable_2)
+
+>>>>>>> b04f48ab02c310e8d347be115172a3498f30de61:Website/maps/data_analysis.py
 	return google_maps(variable_1, variable_2)
 
 def compare(var1, var2):
@@ -193,6 +200,7 @@ def plot_graph(var1, var2):
          Receives colors, an ordered list corresponding with the interior lists of scatter
     output: Creates a trace for each of 9 lists , append to data file and creating scatterplot 
     '''
+
     scatter, colors = get_scatter_array(var1, var2)
     graph_title = var1 + ' vs ' + var2
     data = []

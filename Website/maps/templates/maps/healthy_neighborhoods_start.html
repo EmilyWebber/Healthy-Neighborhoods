@@ -1,99 +1,26 @@
-{% extends 'maps/base.html' %}
+{% include 'maps/healthy_neighborhoods_base.html' %}
 {% load staticfiles %}
 
 {% block body %}
+
 <html>
-
 <head>
-<style>
 
-p {
-	font-size: 90%;
-    margin-top: -10px;
-}
-
-.form-selection{
-	margin-left: 25px;
-	margin-bottom: 75px;
-
-	min-width: 900px;
-}
-
-.my-button {
-
-	width: 30%;
-    margin-right: 2%;
-
-
-    font-size: 115%;
-
-    height: 35px;
-
-}
-
-
-body {
-  font-family: Helvetica, sans-serif;
-
-}
-
-
-</style>
 </head>
 
-
-
 <body>
+    <div id="selection-bar">
+        <h2>Or, explore the data: </h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" name="ex_1" value="Lead Risk" id="button" />
+            <input type="submit" name="ex_2" value="Concentrated Disadvantage" id="button" />
+            <input type="submit" name="ex_3" value="Kids and Guns" id="button" />
+        </form>
 
-<div class = "form-selection">
-
-
-<h2>Select your variable: </h2>
-
-<form method ="post" class = "dropdown">
-	{% csrf_token %}
-	{{form}}
-	<input type="submit" value="Submit" class ="submit-button"/>
-</form>
-
-
-<p>Choose <b>None</b> to display the range of a single variable.<p>
-
-</div>
-
-
-<div class = "form-selection">
-<h2>Or, explore the data: </h2>
-
-
-    <form method ="post">
-      {% csrf_token %}
-
-
-      	<input type="submit" name="ex1" value= "Lead Risk" class = "my-button"/>
-
-      
-      	<input type="submit" name="ex2" value="Concentrated Disadvantage" class = "my-button"/>
-
-
-
-      	<input type="submit" name="ex3" value="Kids and Guns" class = "my-button"/>
-
-   
-
-    </form>
-
-
-
-</div>
-
-
-
-
-
-
+    </div>
 </body>
-
 </html>
 
 {% endblock %}
