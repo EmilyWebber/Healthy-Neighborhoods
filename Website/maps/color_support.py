@@ -5,13 +5,13 @@ color_matrix = {
     ("med", DEFAULT_KEY): "#C8011E",
     ("high", DEFAULT_KEY): "#E50008",
     ("low", "low") : "#8F034C",  
-    ("med", "low") : "#C8011E", 
-    ("high", "low") : "#E50008", 
-    ("low", "med") : "#390691",
+    ("med", "low") : "#390691", 
+    ("high", "low") : "#0008BF", 
+    ("low", "med") : "#C8011E",
     ("med", "med") : "#720463", 
-    ("high", "med") : "#AB0235", 
-    ("low", "high") : "#0008BF",   
-    ("med", "high") : "#1C07A8", 
+    ("high", "med") : "#1C07A8", 
+    ("low", "high") : "#E50008",   
+    ("med", "high") : "#AB0235", 
     ("high", "high") : "#55057A",
     None:  "#B5B5B5"
 }
@@ -37,4 +37,4 @@ scatter_matrix = {
     ("high", "high") : 8,
 }
 
-scatter_color_list = ["#8F034C", "#C8011E", "#E50008", "#390691","#720463","#AB0235","#0008BF","#1C07A8","#55057A"]
+scatter_color_list = ["#8F034C", "#390691", "#0008BF", "#C8011E","#720463","#1C07A8","#E50008","#AB0235","#55057A"]
