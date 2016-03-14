@@ -18,7 +18,10 @@ COLS = 3
 X_ID = 0
 Y_ID = 1
 NAME_ID = 2
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e783fa554ee843c4b575edbaf08068cef77c3fe
 
 def get_lists(var1, var2):
 	'''
@@ -232,5 +235,15 @@ def plot_graph(var1, var2):
         gridwidth = 2,
     ),
   )
+<<<<<<< HEAD
+    fig = go.Figure(data=data, layout=layout)
+    py.iplot(fig, filename='healthy-neighborhoods')
+=======
     fig = go.Figure(data = data, layout = layout)
+<<<<<<< HEAD
     py.iplot(fig, filename = 'healthy-neighborhoods')
+=======
+    py.image.save_as(fig, filename ='neighborhoods.png')
+    py.iplot(fig, filename = 'healthy-neighborhoods')
+>>>>>>> b4a735abadf1f5bd203dc1f23b3477cbfcb3066a
+>>>>>>> 3e783fa554ee843c4b575edbaf08068cef77c3fe
