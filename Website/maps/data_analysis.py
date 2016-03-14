@@ -1,30 +1,16 @@
 import csv
 import sys
-
 import numpy as np
-
-#FILE = 'Data/city_health_stats.csv'
-
 import numpy as np
 import os
-
 from . import color_support
-
-
-path = (os.path.dirname(os.path.abspath(__file__)))
-		#, "static/maps/city_health_stats.csv" )))
-FILE = path +'/static/maps/Data/city_health_stats.csv'
-##base_path = os.path.dirname(__file__)
-##FILE = os.path.abspath(os.path.join(base_path, "Data/city_health_stats.csv" ))
-##FILE = 'static/maps/city_health_stats.csv'
-
-
 import plotly.plotly as py
-py.sign_in('healthy_neighborhoods','d806djbyh8')
 import plotly.graph_objs as go
 
+path = (os.path.dirname(os.path.abspath(__file__)))
+FILE = path +'/static/maps/Data/city_health_stats.csv'
+py.sign_in('healthy_neighborhoods','d806djbyh8')
 VALUES = ["var0", "var1", "var2","var3", "var4", "var5", "var6", "var7", "var8"]
-
 DEFAULT_KEY = None
 DEFAULT_VALUE = []
 
@@ -113,8 +99,6 @@ def assign_colors(xs, ys, rt, final):
 		else:
 			final.append((name, get_color(x, y, xs, ys, False)))
 	coeff = get_correlation_coefficient(xs, ys)
-	if coeff == 1.000:
-		return final
 	return (coeff, final)
 
 def get_thresholds(xs):
@@ -151,6 +135,10 @@ def get_val(x):
 		return None
 
 def main(variable_1, variable_2 = None):
+
+	plot_graph(variable_1, variable_2)
+
+	plot_graph(variable_1, variable_2)
 	#scatterplot.plot_graph(variable_1, variable_2)
 	plot_graph(variable_1, variable_2)
 
@@ -172,7 +160,6 @@ def create_trace(i, val, colors):
     Takes index, list of X, Y, and neighborhood values and creates a trace object
     with color
     '''
-
     trace = VALUES[i]
     color = colors[i]
     x_vals = val[0]
@@ -225,4 +212,3 @@ def plot_graph(var1, var2):
     fig = go.Figure(data=data, layout=layout)
     py.image.save_as(fig, filename='neighborhoods.png')
     py.iplot(fig, filename='healthy-neighborhoods')
- 
