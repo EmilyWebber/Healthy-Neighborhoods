@@ -1,7 +1,6 @@
 import csv
-import sys
-import numpy as np
 import os
+import numpy as np
 from . import color_support
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -19,6 +18,7 @@ COLS = 3
 X_ID = 0
 Y_ID = 1
 NAME_ID = 2
+
 
 def get_lists(var1, var2):
 	'''
@@ -232,6 +232,6 @@ def plot_graph(var1, var2):
         gridwidth = 2,
     ),
   )
-    fig = go.Figure(data = data, layout = layout)
-    py.image.save_as(fig, filename ='neighborhoods.png')
-    py.iplot(fig, filename = 'healthy-neighborhoods')
+
+    fig = go.Figure(data=data, layout=layout)
+    py.iplot(fig, filename='healthy-neighborhoods')

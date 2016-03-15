@@ -47,6 +47,6 @@ def healthy_neighborhoods(request):
 	return render(request, "maps/healthy_neighborhoods_start.html", c)
 
 
-## Site ocumentaion page
+## Site documentaion page
 def documentation(request):
 	return render(request, "maps/documentation.html")

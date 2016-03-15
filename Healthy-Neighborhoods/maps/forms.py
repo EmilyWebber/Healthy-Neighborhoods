@@ -9,6 +9,9 @@ from . import mapping
 
 
 def get_variables_choices():
+	'''
+	Read list of possible indicators from data file
+	'''
 	path = (os.path.dirname(os.path.abspath(__file__)))
 	file_path = path +'/static/maps/Data/city_health_stats.csv'
 
@@ -29,7 +32,12 @@ class Variable(forms.Form):
 
 
 def get_result_list(variable_1, variable_2):
-	## Case of "None" or same variable selected)
+	'''
+	Get list of neighborhoods and their associated color identifier, given the
+	selection of indicators variable_1 and variable_2
+	'''
+
+	## Case of "None" or same variable selected
 	variable_2 = variable_1 if variable_2 == "None" else variable_2
 
 	neighborhood_list = data_analysis.main(variable_1, variable_2)
@@ -37,11 +45,17 @@ def get_result_list(variable_1, variable_2):
 
 
 def get_neighborhood_dict():
+	'''
+	Get neighborhood coordinate dictionary
+	'''
 	neighborhood_dict = mapping.main()
 	return neighborhood_dict
 
 
 def get_combo_dict(neighborhood_list, neighborhood_coord_dict):
+	'''
+	Add color identifier to neighborhood coordinate dictionary
+	'''
 	for neighborhood in neighborhood_coord_dict:
 		neighborhood_coord_dict[neighborhood]["neighborhood"] = json.dumps(neighborhood)
 		for name, color in neighborhood_list:
